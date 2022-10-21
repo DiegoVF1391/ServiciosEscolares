@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -136,20 +134,24 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Recursos de estudiante<i class="right fas fa-angle-left"></i>
+                                    Recursos del administrador<i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
+                                    <!--<a href="{{ route('personals.index') }}" class="nav-link inactive">
+                                        <i class="nav-icon fas fa-calendar"></i>
+                                        <p>Personal</p>
+                                    </a>-->
                                     <a href="#" class="nav-link inactive">
                                         <i class="nav-icon fas fa-calendar"></i>
-                                        <p>Horario</p>
+                                        <p>Personal</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link inactive">
                                         <i class="nav-icon fas fa-th"></i>
-                                        <p>Kardex</p>
+                                        <p>Encargados</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
