@@ -34,7 +34,8 @@ class PersonalController extends Controller
     public function create()
     {
         $personal = new Personal();
-        return view('personal.create', compact('personal'));
+        return view('personal.create', compact('personal')); 
+        
     }
 
     /**
@@ -59,9 +60,9 @@ class PersonalController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Personal $personal)
     {
-        $personal = Personal::find($id);
+        //$personal = Personal::find($id);
 
         return view('personal.show', compact('personal'));
     }
@@ -72,9 +73,9 @@ class PersonalController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Personal $personal)
     {
-        $personal = Personal::find($id);
+        //$personal = Personal::find($id);
 
         return view('personal.edit', compact('personal'));
     }
@@ -101,9 +102,10 @@ class PersonalController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Personal $personal)
     {
-        $personal = Personal::find($id)->delete();
+        //$personal = Personal::find($id)->delete();
+        $personal ->delete();
 
         return redirect()->route('personals.index')
             ->with('success', 'Personal deleted successfully');

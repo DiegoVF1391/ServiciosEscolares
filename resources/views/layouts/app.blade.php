@@ -83,7 +83,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <!-- TE REDIRIGE A LA PARTE DE INFORMACIÓN DE ESTUDIANTE
+                            <!-- Aun no dirige a u ningun lado :
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();">
@@ -143,7 +143,7 @@
                                         <i class="nav-icon fas fa-calendar"></i>
                                         <p>Personal</p>
                                     </a>-->
-                                    <a href="#" class="nav-link inactive">
+                                    <a href="{{ route('personals.index') }}" class="nav-link inactive">
                                         <i class="nav-icon fas fa-calendar"></i>
                                         <p>Personal</p>
                                     </a>

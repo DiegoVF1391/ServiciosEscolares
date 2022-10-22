@@ -27,6 +27,8 @@ class Personal extends Model
     protected $primaryKey = 'id_personal';
     public $incrementing = true;*/
 
+    protected $primaryKey = 'id_personal';
+
     static $rules = [
 		'nombre' => 'required',
 		'email' => 'required',
