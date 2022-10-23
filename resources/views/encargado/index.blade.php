@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Personal
+    encargado
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Personal') }}
+                                {{ __('encargado') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('personals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo personal') }}
+                                <a href="{{ route('encargados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Crear nuevo encargado') }}
                                 </a>
                               </div>
                         </div>
@@ -45,25 +45,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($personals as $personal)
+                                    @foreach ($encargados as $encargado)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $personal->nombre }}</td>
-											<td>{{ $personal->email }}</td>
-											<td>{{ $personal->password }}</td>
-                                            <td>@if($personal->acceso == 1)
+											<td>{{ $encargado->nombre }}</td>
+											<td>{{ $encargado->email }}</td>
+											<td>{{ $encargado->password }}</td>
+                                            <td>@if($encargado->acceso == 1)
                                                     Activo
                                                 @endif
-                                                @if($personal->acceso == 0)
+                                                @if($encargado->acceso == 0)
                                                     Inactivo
                                                 @endif
                                             </td>
 
                                             <td>
-                                                <form action="{{ route('personals.destroy',$personal) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('personals.show',$personal) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('personals.edit',$personal) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('encargados.destroy',$encargado) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('encargados.show',$encargado) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('encargados.edit',$encargado) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $personals->links() !!}
+                {!! $encargados->links() !!}
             </div>
         </div>
     </div>

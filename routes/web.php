@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\EncargadoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,10 @@ Route::get('/', function () {
 //RUTAS PARA LAS VISTAS
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personals.index');
+//Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personals.index');
 //Route::get('/personal/agregar', [App\Http\Controllers\PersonalController::class, 'create'])->name('personal.create');
+//Route::get('/encargados', [App\Http\Controllers\EncargadoController::class, 'index'])->name('encargados');
+
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('personals', PersonalController::class);
+Route::resource('encargados', EncargadoController::class);

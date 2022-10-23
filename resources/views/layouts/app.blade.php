@@ -132,7 +132,7 @@
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-user"></i>
+                                <i class="nav-icon fas  fa-user-secret"></i>
                                 <p>
                                     Recursos del administrador<i class="right fas fa-angle-left"></i>
                                 </p>
@@ -144,32 +144,23 @@
                                         <p>Personal</p>
                                     </a>-->
                                     <a href="{{ route('personals.index') }}" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-calendar"></i>
-                                        <p>Personal</p>
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <p>Gestión del Personal</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('encargados.index') }}" class="nav-link inactive">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Gestión de los Encargados</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-th"></i>
-                                        <p>Encargados</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-cubes"></i>
-                                        <p>Registrar proyecto</p>
+                                        <i class="nav-icon fas fa-bar-chart"></i>
+                                        <p>Reportes estádisticos</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-info-circle"></i>
-                                <p>
-                                    Editar información 
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </nav>

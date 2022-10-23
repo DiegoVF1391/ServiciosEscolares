@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('acceso')->nullable()->default('true');
+            $table->integer('acceso')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

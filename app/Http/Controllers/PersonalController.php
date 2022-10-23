@@ -90,11 +90,11 @@ class PersonalController extends Controller
     public function update(Request $request, Personal $personal)
     {
         request()->validate(Personal::$rules);
-
+        $request->boolean('acceso');
         $personal->update($request->all());
 
         return redirect()->route('personals.index')
-            ->with('success', 'Personal updated successfully');
+            ->with('success', 'Personal editado exitosamente!');
     }
 
     /**

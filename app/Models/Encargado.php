@@ -32,6 +32,7 @@ class Encargado extends Model
 		'nombre' => 'required',
 		'email' => 'required',
 		'password' => 'required',
+    'acceso' => 'required'
     ];
 
     protected $perPage = 20;
@@ -41,7 +42,7 @@ class Encargado extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','email','password'];
+    protected $fillable = ['nombre','email','password','acceso'];
 
     public function departamento(){
       return $this->hasOne(Departamento::class);
