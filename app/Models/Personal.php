@@ -42,4 +42,8 @@ class Personal extends Model
      * @var array
      */
     protected $fillable = ['nombre','email','password', 'acceso'];
+
+    public function departamento(){
+      return $this->belongsTo(Departamento::class, 'id_departamento');
+    }
 }

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Personal;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PersonalSeeder extends Seeder
 {
@@ -16,7 +18,7 @@ class PersonalSeeder extends Seeder
     {
         $p = new Personal();
         $p->nombre = 'Mauricio';
-        $p->email = 'Mauricio@gmail.com';
+        $p->email = 'mauricio@gmail.com';
         $p->password = 'password';
         $p->id_departamento = 1;
         $p->save();

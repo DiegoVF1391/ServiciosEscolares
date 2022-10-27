@@ -5,21 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Producto
- *
- * @property $id
- * @property $nombre
- * @property $email
- * @property $password
- * @property $acceso
- * @property $created_at
- * @property $updated_at
- *
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
-
 class Encargado extends Model
 {
     use HasFactory;
@@ -45,6 +30,6 @@ class Encargado extends Model
     protected $fillable = ['nombre','email','password','acceso'];
 
     public function departamento(){
-      return $this->hasOne(Departamento::class);
+      return $this->belongsTo(Departamento::class, 'id_departamento');
     }
 }

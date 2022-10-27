@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\EncargadoController;
+use App\Http\Controllers\DepartamentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('personals', PersonalController::class);
 Route::resource('encargados', EncargadoController::class);
+Route::resource('departamentos', DepartamentoController::class);

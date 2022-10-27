@@ -155,6 +155,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('departamentos.index') }}" class="nav-link inactive">
+                                        <i class="nav-icon fas fa-cubes"></i>
+                                        <p>Gestión de los Departamentoos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="#" class="nav-link inactive">
                                         <i class="nav-icon fas fa-bar-chart"></i>
                                         <p>Reportes estádisticos</p>

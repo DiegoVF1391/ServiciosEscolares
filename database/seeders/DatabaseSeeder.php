@@ -16,11 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        /**\App\Models\Personal::factory()->create([
-            'nombre' => 'Mauricio',
-            'email' => 'test@example.com',
-            'password' => '12344as',
-            'id_departamento' => '1',
-        ]);*/
+        \App\Models\User::factory()->create([
+            'name' => 'Diego Ferreyra',
+            'email' => 'diegovf674@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        ]);
+        $this->call(
+            [
+                DepartamentoSeeder::class,
+                PersonalSeeder::class
+            ]
+        );
     }
 }
