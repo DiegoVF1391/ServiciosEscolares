@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('personals', PersonalController::class);
+
+Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware('auth.admin')   //kernel.php
+    ->name('admin.index');

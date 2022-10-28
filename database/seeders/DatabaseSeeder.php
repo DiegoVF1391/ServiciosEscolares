@@ -22,5 +22,11 @@ class DatabaseSeeder extends Seeder
             'password' => '12344as',
             'id_departamento' => '1',
         ]);*/
+        \App\Models\User::factory()->create([
+            'name' => 'Chris',
+            'email' => 'chris@admin.com',
+            'password' => '12345678',
+            'role' => 'admin',
+        ]);
     }
 }
