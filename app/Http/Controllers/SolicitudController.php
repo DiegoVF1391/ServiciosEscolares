@@ -115,13 +115,13 @@ class SolicitudController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id)
+    public function cancel($id)
     {
         $solicitud = Solicitud::find($id);
-        $solicitud->estado ='cancelado';
+        $solicitud->estado ='pendiente';
         $solicitud->save();
 
         return redirect()->route('solicitud.index')
-            ->with('success', 'Solicitud deleted successfully');
+            ->with('success', 'Se ha enviado petición para cancelar solicitud');
     }
 }

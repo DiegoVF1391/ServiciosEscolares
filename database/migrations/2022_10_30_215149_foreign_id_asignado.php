@@ -8,14 +8,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *                  Id del empleado al que se le asigna una solicitud
      * @return void
      */
     public function up()
     {
         Schema::table('solicitudes', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_departamento')->nullable();
-            $table->foreign('id_departamento')->references('id_departamento')->on('departamentos');
+            $table->unsignedBigInteger('id_asignado')->nullable();
+            $table->foreign('id_asignado')->references('id')->on('users');
         });
     }
 
@@ -27,8 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('solicitudes', function (Blueprint $table) {
-            $table->dropForeign(['id_departamento']);
-            $table->dropColumn('id_departamento');
+            //
         });
     }
 };
