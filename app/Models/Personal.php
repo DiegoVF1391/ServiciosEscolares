@@ -22,10 +22,10 @@ use Illuminate\Database\Eloquent\Model;
 class Personal extends Model
 {
     use HasFactory;
-    /*
+    
     protected $table = 'personals';
     protected $primaryKey = 'id_personal';
-    public $incrementing = true;*/
+    public $incrementing = true;
 
     static $rules = [
 		'nombre' => 'required',
