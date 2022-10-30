@@ -15,9 +15,11 @@ class Solicitud extends Model
     public $incrementing = true;
 
     static $rules = [
-		'estado' => 'required',
-		'calificacion' => 'required',
-		'fechaAsignacion' => 'required',
+      'nombre' => 'required',
+      'descripcion' => 'required',
+      'id_departamento' => 'required|min:0|not_in:0'
+      // 'estado' => 'requierd',
+      // 'fechaAsignacion' => 'required',
     ];
 
     protected $perPage = 20;
@@ -27,5 +29,9 @@ class Solicitud extends Model
      *
      * @var array
      */
-    protected $fillable = ['estado','calificacion','comentarios', 'fechaAsignacion', 'fechaFinalización'];
+    protected $fillable = ['nombre','descripcion','estado', 'id_departamento' ,'calificacion','comentarios', 'fechaAsignacion', 'fechaFinalización'];
+
+    public function departamento(){
+      return $this->belongsTo(Departamento::class, 'id_departamento','id_departamento');
+    }
 }
