@@ -59,7 +59,7 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('solicitud.edit',$solicitud->id_solicitud) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-ban"></i> Cancelar</button>
                                                 </form>
                                             </td>
                                         </tr>

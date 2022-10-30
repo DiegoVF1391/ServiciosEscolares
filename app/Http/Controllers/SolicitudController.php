@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Departamento;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class SolicitudController
@@ -22,8 +23,7 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::paginate();
         return view('solicitud.index', compact('solicitud'))
             ->with('i', (request()->input('page', 1) - 1) * $solicitud->perPage());
-        // $solicitud = Solicitud::with('departamento')->paginate(3);
-        // return view('solicitud.index',['solicitud' => $solicitud]);
+        
     }
 
     /**
@@ -46,11 +46,12 @@ class SolicitudController extends Controller
      */
     public function store(Request $request)
     {
-        // request()->validate(Solicitud::$rules);
-
-        // $solicitud = Solicitud::create($request->all());
         $data = request()->validate(Solicitud::$rules);
         $solicitud = Solicitud::create($data);
+        
+        $usu = Solicitud::find($solicitud->id_solicitud);
+        $usu->id_user = auth()->user()->id;
+        $usu->save();
 
         return redirect()->route('solicitud.index')
             ->with('success', 'Solicitud created successfully.');
@@ -78,8 +79,8 @@ class SolicitudController extends Controller
     public function edit($id)
     {
         $solicitud = Solicitud::find($id);
-
-        return view('solicitud.edit', compact('solicitud'));
+        $departamentos = Departamento::all();
+        return view('solicitud.edit', compact('solicitud','departamentos'));
     }
 
     /**
@@ -91,12 +92,22 @@ class SolicitudController extends Controller
      */
     public function update(Request $request, Solicitud $solicitud)
     {
-        request()->validate(Solicitud::$rules);
+        $data = request()->validate([
+            'comentarios'     => 'string|string|max:250',
+            'estado' => 'string|string|max:50',
+            'calificacion'  =>  'integer|min:0|max:10'
+        ]);
 
-        $solicitud->update($request->all());
+        $solicitud->update($data);
+
+        if($request->estado =='finalizado'){
+            $fechaFin = Solicitud::find($solicitud->id_solicitud);
+            $fechaFin->fechaFinalizacion = DB::raw('NOW()');
+            $fechaFin->save();
+        }
 
         return redirect()->route('solicitud.index')
-            ->with('success', 'Solicitud updated successfully');
+            ->with('success', 'la solicitud ha sido retroalimentada');
     }
 
     /**
@@ -106,7 +117,9 @@ class SolicitudController extends Controller
      */
     public function destroy($id)
     {
-        $solicitud = Solicitud::find($id)->delete();
+        $solicitud = Solicitud::find($id);
+        $solicitud->estado ='cancelado';
+        $solicitud->save();
 
         return redirect()->route('solicitud.index')
             ->with('success', 'Solicitud deleted successfully');

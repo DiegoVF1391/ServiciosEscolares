@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('calificacion')->default(0);
             $table->string('comentarios', 250)->nullable()->default('(Sin comentarios)');
             $table->date('fechaAsignacion')->default(DB::raw('NOW()'));
-            $table->date('fechaFinalización')->nullable();
+            $table->date('fechaFinalizacion')->nullable();
             $table->timestamps();
         });
     }

@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Califición:</strong>
-                            {{ $solicitud->calificacion }}
+                            {{ $solicitud->calificacion ? $solicitud->calificacion : "Sin calificar" }}
                         </div>
                         <div class="form-group">
                             <strong>Descripción:</strong>

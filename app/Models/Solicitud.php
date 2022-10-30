@@ -15,10 +15,11 @@ class Solicitud extends Model
     public $incrementing = true;
 
     static $rules = [
-      'nombre' => 'required',
-      'descripcion' => 'required',
-      'id_departamento' => 'required|min:0|not_in:0'
-      // 'estado' => 'requierd',
+      'nombre' => 'required|string|max:50',
+      'descripcion' => 'required|string|max:250',
+      'id_departamento' => 'required|min:0|not_in:0',
+      'comentarios'     => 'string|string|max:250',
+      'estado' => 'string|string|max:50',
       // 'fechaAsignacion' => 'required',
     ];
 
