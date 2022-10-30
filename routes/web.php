@@ -24,9 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /**Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personal');**/
-
+// Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personal');
 //RUTAS PARA LA BASE DE DATOS
-Route::resource('personals', PersonalController::class);
+Route::resource('personals', PersonalController::class)->middleware('auth.admin');   //kernel.php;
 
 Route::get('/admin', [AdminController::class, 'index'])
     ->middleware('auth.admin')   //kernel.php
