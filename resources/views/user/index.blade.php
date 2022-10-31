@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    departamento
+    Personal
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('departamento') }}
+                                {{ __('Personal') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('departamentos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo departamento') }}
+                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Crear nuevo') }}
                                 </a>
                               </div>
                         </div>
@@ -37,23 +37,31 @@
                                         <th>No</th>
                                         
 										<th>Nombre</th>
-										<!--<th>Encargado</th>-->
+										<th>Email</th>
+										<!--<th>Acceso</th>-->
                                         
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($departamentos as $departamento)
+                                    @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $departamento->id_departamento }}</td>
+                                            <td>{{ ++$i }}</td>
                                             
-											<td>{{ $departamento->nombre }}</td>
-											<!--<td>{{ $departamento->name }}</td>-->
+											<td>{{ $user->name }}</td>
+											<td>{{ $user->email }}</td>
+                                            <!--<td>@if($user->acceso == true)
+                                                    Activo
+                                                @endif
+                                                @if($user->acceso == false)
+                                                    Inactivo
+                                                @endif
+                                            </td>-->
 
                                             <td>
-                                                <form action="{{ route('departamentos.destroy',$departamento) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('departamentos.show',$departamento) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('departamentos.edit',$departamento) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
@@ -66,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $departamentos->links() !!}
+                {!! $users->links() !!}
             </div>
         </div>
     </div>

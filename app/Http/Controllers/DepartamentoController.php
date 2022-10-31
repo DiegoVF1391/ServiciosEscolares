@@ -20,6 +20,11 @@ class DepartamentoController extends Controller
     {
         $departamentos = Departamento::paginate();
 
+        /*$departamentos = DB::table('departamentos')
+        ->join('users', 'departamentos.id_encargado', '=', 'users.id')
+        ->select('departamentos.id_departamento', 'departamentos.nombre', 'users.name')
+        ->get()->paginate(20);*/
+
         return view('departamento.index', compact('departamentos'))
             ->with('i', (request()->input('page', 1) - 1) * $departamentos->perPage());
     }
