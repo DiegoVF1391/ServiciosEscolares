@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\UserController; 
+use App\Http\Controllers\EncargadoController; 
 use App\Http\Controllers\SolicitudController; 
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\DepartamentoController;
@@ -30,6 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personal');
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('users', UserController::class)->middleware('auth.admin'); 
+Route::resource('encargados', EncargadoController::class)->middleware('auth.admin'); 
 Route::resource('departamentos', DepartamentoController::class)->middleware('auth.admin');   
 Route::resource('solicitud', SolicitudController::class)->middleware('auth.user');   
 Route::resource('bitacora', BitacoraController::class)->middleware('auth.user');  

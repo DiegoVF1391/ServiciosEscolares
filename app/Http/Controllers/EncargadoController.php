@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Encargado;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 /**
- * Class UserController
+ * Class EncargadoController
  * @package App\Http\Controllers
  */
-class UserController extends Controller
+class EncargadoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = User::paginate();
-        $users = DB::select('select * from users where role = :role', ['role' => 'user']);
+        $encargados = DB::select('select * from users where role = :role', ['role' => 'boss']);
 
-        return view('user.index', compact('users'));
-            //->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        return view('encargado.index', compact('encargados'));
+            //->with('i', (request()->input('page', 1) - 1) * $encargados->perPage());
     }
-    
 
     /**
      * Show the form for creating a new resource.

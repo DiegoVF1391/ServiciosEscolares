@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $user->nombre ?? 'Mostrar user' }}
+    {{ $user->name ?? 'Mostrar personal' }}
 @endsection
 
 @section('content')

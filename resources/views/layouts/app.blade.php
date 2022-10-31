@@ -141,7 +141,7 @@
                                 
                                 @if (auth()->user()->role == 'admin')
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link inactive">
+                                        <a href="{{ route('encargados.index') }}" class="nav-link inactive">
                                             <i class="nav-icon fas fa-th"></i>
                                             <p>Encargados</p>
                                         </a>

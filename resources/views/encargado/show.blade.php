@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $personal->nombre ?? 'Mostrar personal' }}
+    {{ $encargado->name ?? 'Mostrar encargado' }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Mostrar personal</span>
+                            <span class="card-title">Mostrar encargado</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('personals.index') }}">Regresar</a>
+                            <a class="btn btn-primary" href="{{ route('encargados.index') }}">Regresar</a>
                         </div>
                     </div>
 
@@ -22,26 +22,21 @@
                         
                         <div class="form-group">
                             <strong>Nombre:</strong>
-                            {{ $personal->nombre }}
+                            {{ $encargado->name }}
                         </div>
                         <div class="form-group">
                             <strong>Correo Electrónico:</strong>
-                            {{ $personal->email }}
+                            {{ $encargado->email }}
                         </div>
-                        <div class="form-group">
-                            <strong>Contraseña:</strong>
-                            {{ $personal->password }}
-                        </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <strong>Acceso:</strong>
-                            @if($personal->acceso == true)
+                            @if($user->acceso == true)
                                 Activo
                             @endif
-                            @if($personal->acceso == false)
+                            @if($user->acceso == false)
                                 Inactivo
                             @endif
-                        </div>
-
+                        </div>-->
                     </div>
                 </div>
             </div>
