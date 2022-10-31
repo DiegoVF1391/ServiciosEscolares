@@ -46,15 +46,15 @@
                                 <tbody>
                                     @foreach ($solicitud as $solicitud)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            {{-- <td>{{ ++$i }}</td> --}}
                                             
 											<td>{{ $solicitud->nombre }}</td>
 											<td>{{ $solicitud->descripcion }}</td>
-                                            <td>{{ $solicitud->departamento->nombre }}</td>
+                                            <td>{{ $solicitud->departamento }}</td>
 											<td>{{ $solicitud->estado }}</td>
 
                                             <td>
-                                                <form action="{{ route('solicitud.cancel',$solicitud->id_solicitud) }}" method="POST">
+                                                <form action="{{ route('solicitud.destroy',$solicitud->id_solicitud) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('solicitud.show',$solicitud->id_solicitud) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('solicitud.edit',$solicitud->id_solicitud) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf

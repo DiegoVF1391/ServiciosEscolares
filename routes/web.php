@@ -28,4 +28,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personal');
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('personals', PersonalController::class)->middleware('auth.admin');   
-Route::resource('solicitud', SolicitudController::class)->middleware('auth.admin');   
+Route::resource('solicitud', SolicitudController::class)->middleware('auth.user');   

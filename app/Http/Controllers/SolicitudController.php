@@ -20,9 +20,17 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        $solicitud = Solicitud::paginate();
-        return view('solicitud.index', compact('solicitud'))
-            ->with('i', (request()->input('page', 1) - 1) * $solicitud->perPage());
+        $id = auth()->user()->id;
+        $solicitud = DB::select(
+            "SELECT s.id_solicitud, s.nombre, s.descripcion, s.estado, d.nombre as departamento
+            FROM solicitudes s 
+            LEFT JOIN departamentos AS d ON d.id_departamento = s.id_departamento
+            WHERE id_user_asigna =  $id OR id_asignado = $id"
+        );
+        // $solicitud = Solicitud::paginate();
+        // dd($solicitud);
+        return view('solicitud.index', compact('solicitud'));
+            //->with('i', (request()->input('page', 1) - 1) * $solicitud->perPage());
         
     }
 
@@ -50,7 +58,7 @@ class SolicitudController extends Controller
         $solicitud = Solicitud::create($data);
         
         $usu = Solicitud::find($solicitud->id_solicitud);
-        $usu->id_user = auth()->user()->id;
+        $usu->id_user_asigna = auth()->user()->id;
         $usu->save();
 
         return redirect()->route('solicitud.index')
@@ -115,7 +123,7 @@ class SolicitudController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function cancel($id)
+    public function destroy($id)
     {
         $solicitud = Solicitud::find($id);
         $solicitud->estado ='pendiente';
