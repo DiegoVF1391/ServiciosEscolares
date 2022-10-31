@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\PersonalController; 
-use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\SolicitudController; 
+use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('personals', PersonalController::class)->middleware('auth.admin');   
 Route::resource('solicitud', SolicitudController::class)->middleware('auth.user');   
+Route::resource('bitacora', BitacoraController::class)->middleware('auth.user');  

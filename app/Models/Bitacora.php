@@ -15,9 +15,8 @@ class Bitacora extends Model
     public $timestamps = false;
 
     static $rules = [
-		'actividad' => 'required',
-		'fechaInicio' => 'required',
-        'fechaFinal' => 'required',
+		'actividad' => 'required|string|max:100',
+        'descripcion' => 'string|max:250',
     ];
 
     protected $perPage = 20;

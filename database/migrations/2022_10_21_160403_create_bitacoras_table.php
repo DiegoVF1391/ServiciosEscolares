@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('actividad',100);
             $table->string('descripcion',250)->nullable()->default('(Sin descripción)');
             $table->date('fechaRegistro')->default(DB::raw('NOW()'));
-            $table->date('fechaFinal');
         });
     }
 

@@ -170,7 +170,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link inactive"  >
+                                        <a href="{{  route('bitacora.index') }}" class="nav-link inactive"  >
                                             <i class="fa-solid fa-file-waveform"></i>
                                             <p>Bitácoras</p>
                                         </a>
