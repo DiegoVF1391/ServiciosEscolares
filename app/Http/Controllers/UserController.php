@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 /**
  * Class UserController
  * @package App\Http\Controllers
@@ -18,10 +18,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
+        //$users = User::paginate();
+        $users = DB::select('select * from users where role = :role', ['role' => 'user']);
 
-        return view('user.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        return view('user.index', compact('users'));
+            //->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
     /**

@@ -46,17 +46,10 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $user->id }}</td>
                                             
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->email }}</td>
-                                            <!--<td>@if($user->acceso == true)
-                                                    Activo
-                                                @endif
-                                                @if($user->acceso == false)
-                                                    Inactivo
-                                                @endif
-                                            </td>-->
 
                                             <td>
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
@@ -74,7 +67,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $users->links() !!}
             </div>
         </div>
     </div>
