@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('bitacoras', function (Blueprint $table) {
             $table->id('id_bitacora');
-            $table->string('actividad');
-            $table->string('descripcion')->nullable()->default('(Sin comentarios)');
-            $table->date('fechaInicio');
+            $table->string('actividad',100);
+            $table->string('descripcion',250)->nullable()->default('(Sin descripción)');
+            $table->date('fechaRegistro')->default(DB::raw('NOW()'));
             $table->date('fechaFinal');
         });
     }

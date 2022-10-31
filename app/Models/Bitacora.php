@@ -12,6 +12,7 @@ class Bitacora extends Model
     protected $table = 'bitacoras';
     protected $primaryKey = 'id_bitacora';
     public $incrementing = true;
+    public $timestamps = false;
 
     static $rules = [
 		'actividad' => 'required',

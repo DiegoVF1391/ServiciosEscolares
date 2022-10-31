@@ -17,10 +17,12 @@ class DepartamentoSeeder extends Seeder
     {
         $d = new Departamento();
         $d->nombre = 'Mantenimiento';
+        $d-> id_encargado = 2;
         $d->save();
 
         $d2 = new Departamento();
         $d2->nombre = 'IT';
+        $d2-> id_encargado = 3;
         $d2->save();
     
         /**\App\Models\Departamento::factory()->create([
