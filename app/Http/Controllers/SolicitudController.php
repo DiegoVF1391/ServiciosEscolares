@@ -6,6 +6,7 @@ use App\Models\Departamento;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\Object_;
 
 /**
  * Class SolicitudController
@@ -20,17 +21,17 @@ class SolicitudController extends Controller
      */
     public function index()
     {
+
         $id = auth()->user()->id;
-        $solicitud = DB::select(
-            "SELECT s.id_solicitud, s.nombre, s.descripcion, s.estado, d.nombre as departamento
-            FROM solicitudes s 
-            LEFT JOIN departamentos AS d ON d.id_departamento = s.id_departamento
-            WHERE id_user_asigna =  $id OR id_asignado = $id"
-        );
-        // $solicitud = Solicitud::paginate();
-        // dd($solicitud);
-        return view('solicitud.index', compact('solicitud'));
-            //->with('i', (request()->input('page', 1) - 1) * $solicitud->perPage());
+        $solicitud = DB::table('solicitudes')
+        ->join('departamentos', 'solicitudes.id_departamento', '=', 'departamentos.id_departamento')
+        ->select('solicitudes.id_solicitud', 'solicitudes.nombre', 'solicitudes.descripcion', 'solicitudes.estado', 'departamentos.nombre as departamento')
+        ->where('solicitudes.id_user_asigna', '=', $id)
+        ->orWhere('solicitudes.id_asignado', '=', $id)
+        ->paginate(20);
+
+        return view('solicitud.index', compact('solicitud'))
+            ->with('i', (request()->input('page', 1) - 1) * $solicitud->perPage());
         
     }
 
