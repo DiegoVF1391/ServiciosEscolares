@@ -24,12 +24,12 @@ class Encargado extends Model
 {
     use HasFactory;
     
-    protected $table = 'encargados';
+    /*protected $table = 'encargados';
     protected $primaryKey = 'id_encargado';
     public $incrementing = true;
-
+*/
     static $rules = [
-		'nombre' => 'required',
+		'name' => 'required',
 		'email' => 'required',
 		'password' => 'required',
     ];
@@ -43,7 +43,7 @@ class Encargado extends Model
      */
     protected $fillable = ['nombre','email','password'];
 
-    public function departamento(){
+    /*public function departamento(){
       return $this->hasOne(Departamento::class);
-    }
+    }*/
 }
