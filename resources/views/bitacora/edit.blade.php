@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Modificar datos de personal
+    Retroalimentar bitácora
 @endsection
 
 @section('content')
@@ -13,14 +13,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Modificar datos del personal</span>
+                        <span class="card-title">Modificar datos de bitácora</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('personals.update', $personal->id_personal) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('bitacora.update', $bitacora->id_bitacora) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('personal.form')
+                            @include('bitacora.form_retro')
 
                         </form>
                     </div>

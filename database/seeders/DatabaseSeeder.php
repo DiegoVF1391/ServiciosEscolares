@@ -29,10 +29,26 @@ class DatabaseSeeder extends Seeder
             'role' => 'boss',
         ]);
         \App\Models\User::factory()->create([
+            'name' => 'Adrian',
+            'email' => 'adrian@boss.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'boss',
+        ]);
+        \App\Models\User::factory()->create([
             'name' => 'Luis',
             'email' => 'luis@user.com',
             'password' => Hash::make('12345678'),
             'role' => 'user',
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Alex',
+            'email' => 'alex@user.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'user',
+        ]);
+
+        $this->call([
+            DepartamentoSeeder::class
         ]);
     }
 }

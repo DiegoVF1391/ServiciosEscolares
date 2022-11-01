@@ -8,14 +8,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *          esta migración asocia la solicitud con el usuario que registra la solicitud
      * @return void
      */
     public function up()
     {
         Schema::table('solicitudes', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_personal')->nullable();
-            $table->foreign('id_personal')->references('id_personal')->on('personals');
+            $table->unsignedBigInteger('id_user_asigna')->nullable();
+            $table->foreign('id_user_asigna')->references('id')->on('users');
         });
     }
 

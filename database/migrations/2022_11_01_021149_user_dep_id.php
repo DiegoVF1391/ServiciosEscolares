@@ -8,12 +8,12 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *                                  asocia un usuario a un departamento
      * @return void
      */
     public function up()
     {
-        Schema::table('encargados', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('id_departamento')->nullable();
             $table->foreign('id_departamento')->references('id_departamento')->on('departamentos');
         });
@@ -26,9 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('encargados', function (Blueprint $table) {
-            $table->dropForeign(['id_departamento']);
-            $table->dropColumn('id_departamento');
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 };

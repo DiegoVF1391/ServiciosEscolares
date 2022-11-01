@@ -2,23 +2,20 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *                  Id del empleado al que se le asigna una solicitud
      * @return void
      */
     public function up()
     {
-        Schema::create('bitacoras', function (Blueprint $table) {
-            $table->id('id_bitacora');
-            $table->string('actividad',100);
-            $table->string('descripcion',250)->nullable()->default('(Sin descripción)');
-            $table->date('fechaRegistro')->default(DB::raw('NOW()'));
+        Schema::table('solicitudes', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_asignado')->nullable();
+            $table->foreign('id_asignado')->references('id')->on('users');
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bitacoras');
+        Schema::table('solicitudes', function (Blueprint $table) {
+            //
+        });
     }
 };

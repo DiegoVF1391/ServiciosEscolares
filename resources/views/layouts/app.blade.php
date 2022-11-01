@@ -138,38 +138,52 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <!--<a href="{{ route('personals.index') }}" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-calendar"></i>
-                                        <p>Personal</p>
-                                    </a>-->
-                                    <a href="#" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-calendar"></i>
-                                        <p>Personal</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-th"></i>
-                                        <p>Encargados</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link inactive">
-                                        <i class="nav-icon fas fa-cubes"></i>
-                                        <p>Registrar proyecto</p>
-                                    </a>
-                                </li>
+                                
+                                @if (auth()->user()->role == 'admin')
+                                    <li class="nav-item">
+                                        <a href="{{ route('encargados.index') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-th"></i>
+                                            <p>Encargados</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{  route('departamentos.index') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-th"></i>
+                                            <p>Departamentos</p>
+                                        </a>
+                                    </li>
+                                    <!--<li class="nav-item">
+                                        <a href="#" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-cubes"></i>
+                                            <p>Registrar proyecto</p>
+                                        </a>
+                                    </li>-->
+                                @endif
+                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'boss')
+                                    <li class="nav-item">
+                                        <a href="{{ route('users.index') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>Personal</p>
+                                        </a>
+                                    </li>
+                                @endif
+                                
+                                @if (auth()->user()->role == 'user' || auth()->user()->role == 'boss')
+                                    <li class="nav-item">
+                                        <a href="{{  route('solicitud.index') }}" class="nav-link inactive"  >
+                                            <i class="fa-solid fa-list-check"></i>
+                                            <p>Solicitudes</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{  route('bitacora.index') }}" class="nav-link inactive"  >
+                                            <i class="fa-solid fa-file-waveform"></i>
+                                            <p>Bitácoras</p>
+                                        </a>
+                                    </li>
+                                @endif
+                                
                             </ul>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-info-circle"></i>
-                                <p>
-                                    Editar información 
-                                </p>
-                            </a>
                         </li>
                     </ul>
                 </nav>

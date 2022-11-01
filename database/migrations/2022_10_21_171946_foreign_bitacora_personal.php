@@ -8,14 +8,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *                      Usuario asociado con la bitacora recien creada
      * @return void
      */
     public function up()
     {
         Schema::table('bitacoras', function (Blueprint $table) {
             $table->unsignedBigInteger('id_personal')->nullable();
-            $table->foreign('id_personal')->references('id_personal')->on('personals');
+            $table->foreign('id_personal')->references('id')->on('users');
         });
     }
 
