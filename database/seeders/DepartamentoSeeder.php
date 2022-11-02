@@ -26,7 +26,7 @@ class DepartamentoSeeder extends Seeder
         $d2-> id_encargado = 3;
         $d2->save();
 
-
+        //asociacon de usuarios con departamentos
         $usu = User::find(2);
         $usu->id_departamento = 1;
         $usu->save();
@@ -40,6 +40,22 @@ class DepartamentoSeeder extends Seeder
         $usu->save();
 
         $usu = User::find(5);
+        $usu->id_departamento = 2;
+        $usu->save();
+
+        $usu = User::find(6);
+        $usu->id_departamento = 1;
+        $usu->save();
+
+        $usu = User::find(7);
+        $usu->id_departamento = 2;
+        $usu->save();
+
+        $usu = User::find(8);
+        $usu->id_departamento = 1;
+        $usu->save();
+
+        $usu = User::find(9);
         $usu->id_departamento = 2;
         $usu->save();
     

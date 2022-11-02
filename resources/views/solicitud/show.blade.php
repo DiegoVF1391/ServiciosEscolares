@@ -48,6 +48,23 @@
                             <strong>Comentarios:</strong>
                             {{ $solicitud->comentarios }}
                         </div>
+                        @if (auth()->user()->role == 'boss')
+                            <form method="POST" action="{{ route('solicitud.update', $solicitud->id_solicitud) }}"  role="form" enctype="multipart/form-data">
+                                {{ method_field('PATCH') }}
+                                @csrf
+                                <div class="form-group">
+                                    {{ Form::label('Asignar a:  ') }}
+                                    <select name="id_asignado" id="">
+                                        @foreach ($usus as $u )
+                                            <option value="{{$u->id}}">{{$u->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="btnsave" class="btn btn-success" type="submit"><i class="fa-solid fa-paper-plane"></i> Asignar</button>
+                                </div>
+                            </form>
+                        @endif
 
                     </div>
                 </div>

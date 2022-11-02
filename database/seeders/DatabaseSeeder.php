@@ -46,6 +46,30 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'role' => 'user',
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Mantenimiento1',
+            'email' => 'mantenimiento1@user.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'user',
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'It1',
+            'email' => 'it1@user.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'user',
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Mantenimiento2',
+            'email' => 'mantenimiento2@user.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'user',
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'It2',
+            'email' => 'it2@user.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'user',
+        ]);
 
         $this->call([
             DepartamentoSeeder::class
