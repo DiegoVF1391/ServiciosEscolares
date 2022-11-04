@@ -18,7 +18,6 @@
                     <option value="{{$d->id_departamento}}">{{$d->nombre}}</option>
                 @endforeach
             </select>
-            
         </div>
         
     </div>

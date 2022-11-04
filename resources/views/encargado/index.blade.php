@@ -38,22 +38,24 @@
                                         
 										<th>Nombre</th>
 										<th>Email</th>
+                                        <th>Departamento</th>
                                         
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($encargados as $encargado)
+                                    @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $encargado->id }}</td>
+                                            <td>{{ $user->id }}</td>
                                             
-											<td>{{ $encargado->name }}</td>
-											<td>{{ $encargado->email }}</td>
+											<td>{{ $user->name }}</td>
+											<td>{{ $user->email }}</td>
+                                            <td>{{ $user->departamento }}</td>
 
                                             <td>
-                                                <form action="{{ route('encargados.destroy',$encargado->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('encargados.show',$encargado->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('encargados.edit',$encargado->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('encargados.destroy',$user->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('encargados.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('encargados.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>

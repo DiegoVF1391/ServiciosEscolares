@@ -22,11 +22,11 @@
                         
                         <div class="form-group">
                             <strong>Nombre:</strong>
-                            {{ $encargado->name }}
+                            {{ $user->name }}
                         </div>
                         <div class="form-group">
                             <strong>Correo Electrónico:</strong>
-                            {{ $encargado->email }}
+                            {{ $user->email }}
                         </div>
                         <!--<div class="form-group">
                             <strong>Acceso:</strong>

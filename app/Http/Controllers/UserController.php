@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 /**
@@ -18,10 +19,19 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = User::paginate();
-        $users = DB::select('select * from users where role = :role', ['role' => 'user']);
+        $id = auth()->user()->id;
+        $users = DB::table('users')
+        ->join('departamentos', 'users.id_departamento', '=', 'departamentos.id_departamento')
+        ->select('users.id','users.name', 'users.email', 'departamentos.nombre as departamento')
+        ->where('users.role', '=', 'user')
+        ->paginate(20);
 
-        return view('user.index', compact('users'));
+        return view('user.index', compact('users'))
+            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        
+        //$users = User::paginate();
+        //$users = DB::select('select * from users where role = :role', ['role' => 'user']);
+        //return view('user.index', compact('users'));
             //->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
     
@@ -34,7 +44,8 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        return view('user.create', compact('user'));
+        $departamentos = Departamento::all();
+        return view('user.create', compact('user','departamentos'));
     }
 
     /**
@@ -47,7 +58,7 @@ class UserController extends Controller
     {
         request()->validate(User::$rules);
 
-        $user = User::create($request->all());
+        $usern = User::create($request->all());
 
         return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
@@ -75,8 +86,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('user.edit', compact('user'));
+        $departamentos = Departamento::all();
+        return view('user.edit', compact('user','departamentos'));
     }
 
     /**
@@ -109,3 +120,6 @@ class UserController extends Controller
             ->with('success', 'User deleted successfully');
     }
 }
+
+
+

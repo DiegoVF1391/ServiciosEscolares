@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departamento;
 use App\Models\Encargado;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,9 +21,17 @@ class EncargadoController extends Controller
      */
     public function index()
     {
-        $encargados = DB::select('select * from users where role = :role', ['role' => 'boss']);
-
-        return view('encargado.index', compact('encargados'));
+        $id = auth()->user()->id;
+        $users = DB::table('users')
+        ->join('departamentos', 'users.id_departamento', '=', 'departamentos.id_departamento')
+        ->select('users.id','users.name', 'users.email', 'departamentos.nombre as departamento')
+        ->where('users.role', '=', 'boss')
+        ->paginate(20);
+        return view('encargado.index', compact('users'))
+            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+    
+        //$encargados = DB::select('select * from users where role = :role', ['role' => 'boss']);
+        //return view('encargado.index', compact('encargados'));
             //->with('i', (request()->input('page', 1) - 1) * $encargados->perPage());
     }
 
@@ -34,7 +43,8 @@ class EncargadoController extends Controller
     public function create()
     {
         $user = new User();
-        return view('user.create', compact('user'));
+        $departamentos = Departamento::all();
+        return view('encargado.create', compact('user','departamentos'));
     }
 
     /**
@@ -49,7 +59,7 @@ class EncargadoController extends Controller
 
         $user = User::create($request->all());
 
-        return redirect()->route('users.index')
+        return redirect()->route('encargados.index')
             ->with('success', 'User created successfully.');
     }
 
@@ -62,8 +72,7 @@ class EncargadoController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-
-        return view('user.show', compact('user'));
+        return view('encargado.show', compact('user'));
     }
 
     /**
@@ -75,8 +84,8 @@ class EncargadoController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('user.edit', compact('user'));
+        $departamentos = Departamento::all();
+        return view('encargado.edit', compact('user','departamentos'));
     }
 
     /**
@@ -92,7 +101,7 @@ class EncargadoController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('users.index')
+        return redirect()->route('encargados.index')
             ->with('success', 'User updated successfully');
     }
 
@@ -105,7 +114,7 @@ class EncargadoController extends Controller
     {
         $user = User::find($id)->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->route('encargados.index')
             ->with('success', 'User deleted successfully');
     }
 }
