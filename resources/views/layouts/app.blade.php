@@ -152,14 +152,6 @@
                                             <p>Departamentos</p>
                                         </a>
                                     </li>
-                                    <!--<li class="nav-item">
-                                        <a href="#" class="nav-link inactive">
-                                            <i class="nav-icon fas fa-cubes"></i>
-                                            <p>Registrar proyecto</p>
-                                        </a>
-                                    </li>-->
-                                @endif
-                                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'boss')
                                     <li class="nav-item">
                                         <a href="{{  route('users.index') }}" class="nav-link inactive">
                                             <i class="nav-icon fas fa-calendar"></i>
@@ -167,6 +159,14 @@
                                         </a>
                                     </li>
                                 @endif
+                                {{-- @if (auth()->user()->role == 'admin' || auth()->user()->role == 'boss')
+                                    <li class="nav-item">
+                                        <a href="{{  route('users.index') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>Personal</p>
+                                        </a>
+                                    </li>
+                                @endif --}}
                                 
                                 @if (auth()->user()->role == 'user' || auth()->user()->role == 'boss')
                                     <li class="nav-item">
