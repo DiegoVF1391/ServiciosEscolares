@@ -46,7 +46,7 @@
                                 <tbody>
                                     @foreach ($solicitud as $solicitud)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $solicitud->id_solicitud }}</td>
                                             
 											<td>{{ $solicitud->nombre }}</td>
 											<td>{{ $solicitud->descripcion }}</td>

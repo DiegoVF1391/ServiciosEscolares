@@ -6,6 +6,15 @@
             {{ Form::text('nombre', $departamento->nombre, ['class' => 'form-control' . ($errors->has('nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre']) }}
             {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('Encargado') }}
+            <select name="id_encargado" id="">
+                @foreach ($encargados as $d )
+                    <option value="{{$d->id}}">{{$d->name}}</option>
+                @endforeach
+            </select>
+            
+        </div>
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>  Modificar</button>

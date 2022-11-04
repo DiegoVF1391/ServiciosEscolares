@@ -48,7 +48,7 @@
                                             <td>{{ $departamento->id_departamento }}</td>
                                             
 											<td>{{ $departamento->nombre }}</td>
-											<!--<td>{{ $departamento->name }}</td>-->
+											<!--<td>{{ $departamento->encargado }}</td>-->
 
                                             <td>
                                                 <form action="{{ route('departamentos.destroy',$departamento) }}" method="POST">

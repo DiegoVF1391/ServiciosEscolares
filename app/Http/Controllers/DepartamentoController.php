@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departamento;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\Object_;
 /**
  * Class DepartamentoController
  * @package App\Http\Controllers
@@ -51,6 +53,9 @@ class DepartamentoController extends Controller
         request()->validate(Departamento::$rules);
 
         $departamento = Departamento::create($request->all());
+        /*$ = Solicitud::find($solicitud->id_solicitud);
+        $usu->id_user_asigna = auth()->user()->id;
+        $usu->save();*/
 
         return redirect()->route('departamentos.index')
             ->with('success', 'Departamento created successfully.');
@@ -65,7 +70,8 @@ class DepartamentoController extends Controller
     public function show($id)
     {
         $departamento = Departamento::find($id);
-
+        
+        //$encargado = DB::table('users')->where('id', '=', '$departamento->id_encargado');
         return view('departamento.show', compact('departamento'));
     }
 
@@ -78,7 +84,8 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
         $departamento = Departamento::find($id);
-
+        //$encargados = DB::select('select * from users where role = :role', ['role' => 'boss']);
+        
         return view('departamento.edit', compact('departamento'));
     }
 
