@@ -21,7 +21,7 @@ class Solicitud extends Model
       'id_asignado' => 'integer|min:1',
       'comentarios'     => 'string|string|max:250',
       'estado' => 'string|string|max:50',
-      // 'fechaAsignacion' => 'required',
+      'comentarios_asignado' => 'string|string|max:250'
     ];
 
     protected $perPage = 20;
@@ -31,7 +31,7 @@ class Solicitud extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','descripcion','estado', 'id_departamento' ,'calificacion','comentarios', 'fechaAsignacion', 'fechaFinalización', 'id_asignado'];
+    protected $fillable = ['nombre','descripcion','estado', 'id_departamento' ,'calificacion','comentarios', 'fechaAsignacion', 'fechaFinalización', 'id_asignado', 'comentarios_asignado'];
 
     public function departamento(){
       return $this->belongsTo(Departamento::class, 'id_departamento','id_departamento');

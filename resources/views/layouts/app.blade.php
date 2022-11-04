@@ -116,7 +116,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ route('home') }}" class="brand-link">
-                <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
+                <span class="brand-text font-weight-light">{{ config('app.name', 'PWA') }}</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -134,7 +134,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Recursos del administrador<i class="right fas fa-angle-left"></i>
+                                    Recursos<i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
@@ -181,6 +181,7 @@
                                             <p>Bitácoras</p>
                                         </a>
                                     </li>
+                                    
                                 @endif
                                 
                             </ul>

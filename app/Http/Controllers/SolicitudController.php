@@ -91,8 +91,12 @@ class SolicitudController extends Controller
             ->where('users.id_departamento', '=', $id_departamento)
             ->where('users.id', '<>', auth()->user()->id)->get();
         $solicitud = Solicitud::find($id);
-
-        return view('solicitud.show', compact('solicitud','usus'));
+        $asignado = DB::table('solicitudes')
+        ->join('users', 'solicitudes.id_asignado', '=', 'users.id')
+        ->select('users.name', 'users.id')
+        ->where('solicitudes.id_solicitud', '=', $id)->get();
+        // dd($asignado);
+        return view('solicitud.show', compact('solicitud','usus', 'asignado'));
     }
 
     /**
@@ -105,6 +109,10 @@ class SolicitudController extends Controller
     {
         $solicitud = Solicitud::find($id);
         $departamentos = Departamento::all();
+        if ($solicitud->id_asignado == auth()->user()->id){
+            return view('solicitud.edit_retro', compact('solicitud','departamentos'));
+        }
+        
         return view('solicitud.edit', compact('solicitud','departamentos'));
     }
 
@@ -124,6 +132,7 @@ class SolicitudController extends Controller
 
             $usu = Solicitud::find($solicitud->id_solicitud);
             $usu->id_asignado = $request->id_asignado;
+            $usu->estado = "asignada";
             $usu->save();
 
             return redirect()->route('solicitud.index')
@@ -131,18 +140,31 @@ class SolicitudController extends Controller
         }
         
         $data = request()->validate([
-            'comentarios'     => 'string|string|max:250',
-            'estado' => 'string|string|max:50',
+            'comentarios'     => 'string|string|max:250', 
+            'comentarios_asignado'     => 'string|string|max:250',
+            // 'estado' => 'string|string|max:50',
             'calificacion'  =>  'integer|min:0|max:10',
         ]);
 
 
         $solicitud->update($data);
 
-        if($request->estado =='finalizado'){
-            $fechaFin = Solicitud::find($solicitud->id_solicitud);
-            $fechaFin->fechaFinalizacion = DB::raw('NOW()');
-            $fechaFin->save();
+        // if($request->estado =='atendida'){
+        //     $fechaFin = Solicitud::find($solicitud->id_solicitud);
+        //     $fechaFin->fechaFinalizacion = DB::raw('NOW()');
+        //     $fechaFin->save();
+        // }
+        if($request->estado =='atendida'){
+            $atencion = Solicitud::find($solicitud->id_solicitud);
+            if($atencion->estado == 'pendiente'){
+                $atencion->estado='atendida';
+                $atencion->fechaFinalizacion = DB::raw('NOW()');
+                $atencion->save();
+            }else{
+                $atencion->estado='pendiente';
+                $atencion->save();
+            }
+            
         }
 
         return redirect()->route('solicitud.index')
@@ -156,7 +178,15 @@ class SolicitudController extends Controller
      */
     public function destroy($id)
     {
+
         $solicitud = Solicitud::find($id);
+        if($solicitud->estado!= 'asignada'){
+            $solicitud->estado ='cancelada';
+            $solicitud->save();
+
+            return redirect()->route('solicitud.index')
+            ->with('success', 'Se ha enviado petición para cancelar solicitud');
+        }
         $solicitud->estado ='pendiente';
         $solicitud->save();
 
