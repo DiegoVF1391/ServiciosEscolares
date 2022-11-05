@@ -27,6 +27,6 @@
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>  Aceptar </button>
-        <a class="btn btn-danger" href="{{ route('users.index') }}"><i class="fa fa-fw fa-sign-out"></i>  Cancelar</a>
+        <a class="btn btn-danger" href="{{ route('encargados.index') }}"><i class="fa fa-fw fa-sign-out"></i>  Cancelar</a>
     </div>
 </div>

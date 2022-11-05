@@ -4,7 +4,6 @@ use App\Http\Controllers\EncargadoController;
 use App\Http\Controllers\SolicitudController; 
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\DepartamentoController;
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +26,7 @@ Route::get('/', function () {
 //RUTAS PARA LAS VISTAS
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-/**Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personal');**/
-// Route::get('/personal', [App\Http\Controllers\PersonalController::class, 'index'])->name('personal');
+
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('users', UserController::class)->middleware('auth.admin'); 
 Route::resource('encargados', EncargadoController::class)->middleware('auth.admin'); 
