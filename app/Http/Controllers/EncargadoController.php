@@ -66,11 +66,11 @@ class EncargadoController extends Controller
         $d->id_departamento = $request->id_departamento;
         $d->save();
         
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+        /*return redirect()->route('users.index')
+            ->with('success', 'User created successfully.');*/
 
         return redirect()->route('encargados.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'Encargado creado de manera éxitosa.');
     }
 
     /**
@@ -82,7 +82,9 @@ class EncargadoController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('encargado.show', compact('user'));
+        $departamento = Departamento::find($user->id_departamento);
+        
+        return view('encargado.show', compact('user', 'departamento'));
     }
 
     /**
@@ -112,7 +114,7 @@ class EncargadoController extends Controller
         $user->update($request->all());
 
         return redirect()->route('encargados.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Encargado modificado de manera éxitosa.');
     }
 
     /**
@@ -125,6 +127,6 @@ class EncargadoController extends Controller
         $user = User::find($id)->delete();
 
         return redirect()->route('encargados.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Encargado eliminado de manera éxitosa.');
     }
 }

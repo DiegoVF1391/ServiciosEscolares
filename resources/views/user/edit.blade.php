@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Modificar datos de user
+    Modificar datos del usuario
 @endsection
 
 @section('content')
@@ -13,14 +13,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Modificar datos del user</span>
+                        <span class="card-title">Modificar datos del personal</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.update', $user) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('user.form')
+                            @include('user.form_edit')
 
                         </form>
                     </div>

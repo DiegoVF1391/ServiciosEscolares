@@ -83,9 +83,16 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        //$id = auth()->user()->id;
+        /*$users = DB::table('users')
+        ->join('departamentos', 'users.id_departamento', '=', 'departamentos.id_departamento')
+        ->select('users.id','users.name', 'users.email', 'departamentos.nombre as departamento')
+        ->where('users.role', '=', 'user')
+        ->paginate(20);*/
         $user = User::find($id);
+        $departamento = Departamento::find($user->id_departamento);
 
-        return view('user.show', compact('user'));
+        return view('user.show', compact('user', 'departamento'));
     }
 
     /**

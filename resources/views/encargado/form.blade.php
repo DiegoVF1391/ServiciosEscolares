@@ -12,12 +12,12 @@
             {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('password') }}
+            {{ Form::label('Contraseña') }}
             {{ Form::text('password', $user->password, ['class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'Contraseña']) }}
             {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('password-confirm') }}
+            {{ Form::label('Confirmar contraseña') }}
             {{ Form::text('password', $user->password_confirmation, ['class' => 'form-control' . ($errors->has('password_confirmation') ? ' is-invalid' : ''), 'placeholder' => 'Confirmacion']) }}
             {!! $errors->first('password-confirm', '<div class="invalid-feedback">:message</div>') !!}
         </div>
