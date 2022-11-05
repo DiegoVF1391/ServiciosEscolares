@@ -7,6 +7,7 @@ use App\Models\Encargado;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class EncargadoController
@@ -57,7 +58,16 @@ class EncargadoController extends Controller
     {
         request()->validate(User::$rules);
 
-        $user = User::create($request->all());
+        $d = new User();
+        $d->name = $request->name;
+        $d->email = $request->email;
+        $d->password= Hash::make($request->password);
+        $d->role = 'boss';
+        $d->id_departamento = $request->id_departamento;
+        $d->save();
+        
+        return redirect()->route('users.index')
+            ->with('success', 'User created successfully.');
 
         return redirect()->route('encargados.index')
             ->with('success', 'User created successfully.');

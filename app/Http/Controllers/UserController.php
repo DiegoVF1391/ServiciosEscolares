@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 /**
  * Class UserController
  * @package App\Http\Controllers
@@ -56,10 +57,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(User::$rules);
+        $validated = request()->validate(User::$rules);
 
-        $usern = User::create($request->all());
+        //dd($request->name);
 
+        //$users = User::create($request->all());
+
+        $d = new User();
+        $d->name = $request->name;
+        $d->email = $request->email;
+        $d->password= Hash::make($request->password);
+        $d->role = 'user';
+        $d->id_departamento = $request->id_departamento;
+        $d->save();
+        
         return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
     }
