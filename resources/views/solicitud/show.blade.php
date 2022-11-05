@@ -48,6 +48,18 @@
                             <strong>Comentarios:</strong>
                             {{ $solicitud->comentarios }}
                         </div>
+                        @if ($solicitud->id_asignado!=null)
+                            <div class="form-group">
+                                <strong>Asignado:</strong>
+                                @foreach ($asignado as $a )
+                                    {{$a->name}}
+                                @endforeach
+                            </div>
+                            <div class="form-group">
+                                <strong>Comentarios del que atiende:</strong>
+                                {{ $solicitud->comentarios_asignado }}
+                            </div>
+                        @endif
                         @if (auth()->user()->role == 'boss')
                             <form method="POST" action="{{ route('solicitud.update', $solicitud->id_solicitud) }}"  role="form" enctype="multipart/form-data">
                                 {{ method_field('PATCH') }}

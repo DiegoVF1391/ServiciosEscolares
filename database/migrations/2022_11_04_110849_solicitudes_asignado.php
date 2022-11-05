@@ -8,14 +8,13 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *                                  asocia un usuario a un departamento
+     *
      * @return void
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_departamento')->nullable();
-            $table->foreign('id_departamento')->references('id_departamento')->on('departamentos');
+        Schema::table('solicitudes', function (Blueprint $table) {
+            $table->string('comentarios_asignado', 250)->nullable()->default('(Sin comentarios)');
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('solicitudes', function (Blueprint $table) {
             //
         });
     }

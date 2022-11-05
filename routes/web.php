@@ -32,6 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('users', UserController::class)->middleware('auth.admin'); 
 Route::resource('encargados', EncargadoController::class)->middleware('auth.admin'); 
+Route::resource('encargado', EncargadoController::class)->middleware('auth.admin'); 
 Route::resource('departamentos', DepartamentoController::class)->middleware('auth.admin');   
 Route::resource('solicitud', SolicitudController::class)->middleware('auth.user');   
 Route::resource('bitacora', BitacoraController::class)->middleware('auth.user');  

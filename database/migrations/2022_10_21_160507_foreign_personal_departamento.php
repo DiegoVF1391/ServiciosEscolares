@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
+     *                              asocia un usuario a un departamento
      * @return void
      */
     public function up()
