@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\UserController; 
+use App\Http\Controllers\ChartController; 
 use App\Http\Controllers\EncargadoController; 
 use App\Http\Controllers\SolicitudController; 
 use App\Http\Controllers\BitacoraController;
@@ -26,10 +27,11 @@ Route::get('/', function () {
 //RUTAS PARA LAS VISTAS
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/reporte/servicios', [App\Http\Controllers\ChartController::class, 'serviciosAdmin']);
 
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('users', UserController::class)->middleware('auth.admin'); 
 Route::resource('encargados', EncargadoController::class)->middleware('auth.admin'); 
-Route::resource('departamentos', DepartamentoController::class)->middleware('auth.admin');   
+Route::resource('departamentos', DepartamentoController::class)->middleware('auth.admin');
 Route::resource('solicitud', SolicitudController::class)->middleware('auth.user');   
 Route::resource('bitacora', BitacoraController::class)->middleware('auth.user');  

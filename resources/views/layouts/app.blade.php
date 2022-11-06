@@ -183,6 +183,14 @@
                                     </li>
                                 @endif
                                 
+                                @if (auth()->user()->role == 'admin')
+                                    <li class="nav-item">
+                                        <a href="{{ url('/reporte/servicios') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>Estadisticas de servicios</p>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
                     </ul>

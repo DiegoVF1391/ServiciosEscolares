@@ -129,4 +129,21 @@ class EncargadoController extends Controller
         return redirect()->route('encargados.index')
             ->with('success', 'Encargado eliminado de manera éxitosa.');
     }
+
+    /*public function comprobarDepartamento()
+    {
+        $users = DB::table('users')
+        ->select('users.id_departamento')
+        ->where('users.role', '=', 'boss');
+        $departamentos = Departamento::all();
+        foreach ($users as $u){
+            foreach($departamentos as $d){
+                if($u->id_departamento == $d->id_departamento){
+
+                }
+            }
+        }
+
+        return view('user.edit', compact('user','departamentos'));
+    }*/
 }
