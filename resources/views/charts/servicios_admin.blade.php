@@ -27,15 +27,13 @@
             // Data retrieved https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature
         Highcharts.chart('container', {
         chart: {
-            type: 'line'
+            type: 'column'
         },
         title: {
             text: 'Solicitudes finalizadas en todos los departamentos'
         },
         subtitle: {
-            text: 'Source: ' +
-            '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
-            'target="_blank">Wikipedia.com</a>'
+            text: 'Cantidad total de todas las solicitudes que fueron finalizadas por cada mes'
         },
         xAxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -54,13 +52,12 @@
             }
         },
         series: [{
-            name: 'Solicitudes registradas',
-            data: @json($counts)
-        }/*, {
-            name: 'Tallinn',
-            data: [-2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
-            2.0, -0.9]
-        }*/]
+            name: 'Mantenimiento',
+            data: @json($mantenimiento)
+        }, {
+            name: 'IT',
+            data: @json($it)
+        }]
         });
         </script>
 @endsection
