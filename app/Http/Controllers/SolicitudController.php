@@ -142,18 +142,13 @@ class SolicitudController extends Controller
         $data = request()->validate([
             'comentarios'     => 'string|string|max:250', 
             'comentarios_asignado'     => 'string|string|max:250',
-            // 'estado' => 'string|string|max:50',
             'calificacion'  =>  'integer|min:0|max:10',
         ]);
 
 
         $solicitud->update($data);
 
-        // if($request->estado =='atendida'){
-        //     $fechaFin = Solicitud::find($solicitud->id_solicitud);
-        //     $fechaFin->fechaFinalizacion = DB::raw('NOW()');
-        //     $fechaFin->save();
-        // }
+        
         if($request->estado =='atendida'){
             $atencion = Solicitud::find($solicitud->id_solicitud);
             if($atencion->estado == 'pendiente'){
