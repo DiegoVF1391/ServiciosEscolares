@@ -19,7 +19,19 @@ class BitacoraController extends Controller
      */
     public function index()
     {
+
         $id = auth()->user()->id;
+        if(auth()->user()->role == 'boss'){
+            $dep = auth()->user()->id_departamento;
+            $bitacoras = DB::table('bitacoras')
+            ->join('users', 'bitacoras.id_personal', '=', 'users.id')
+            ->select('bitacoras.id_bitacora', 'bitacoras.actividad', 'bitacoras.descripcion', 'bitacoras.fechaRegistro', 'users.name')
+            ->where('users.id_departamento', '=', $dep)
+            ->paginate(20);
+
+            return view('bitacora.index', compact('bitacoras'))
+            ->with('i', (request()->input('page', 1) - 1) * $bitacoras->perPage());
+        }
         $bitacoras = DB::table('bitacoras')
         ->join('users', 'bitacoras.id_personal', '=', 'users.id')
         ->select('bitacoras.id_bitacora', 'bitacoras.actividad', 'bitacoras.descripcion', 'bitacoras.fechaRegistro')
