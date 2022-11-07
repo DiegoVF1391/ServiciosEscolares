@@ -176,6 +176,7 @@
                                             <p>Solicitudes</p>
                                         </a>
                                     </li>
+                                    
                                     <li class="nav-item">
                                         <a href="{{  route('bitacora.index') }}" class="nav-link inactive"  >
                                             <i class="fa-solid fa-file-waveform"></i>
@@ -202,11 +203,12 @@
                         <div class="col-sm-6">
                             <h1>¡Bienvenido {{ Auth::user()->name }}!</h1>
                             <br>
-                      <div class="row">
+                            @if (auth()->user()->role == 'user')
+                            <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">
-                                    Total de solicitudes pendientes
+                                    Total de solicitudes pendientes:
                                     <h1>{{ 5 }}</h1>
                                 </div>
 
@@ -218,6 +220,8 @@
                       </div>
 
                         </div>
+                      @endif  
+                      
                         <!--
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">

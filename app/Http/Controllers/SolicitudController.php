@@ -22,7 +22,10 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        
+        $solicitudes = Solicitud::count();
+    
+        return view('usuarios.index', compact('solicitudes'));
+
         $id = auth()->user()->id;
         if(auth()->user()->role == 'user'){
             $solicitud = DB::table('solicitudes')
