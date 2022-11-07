@@ -165,6 +165,7 @@
                                             <i class="nav-icon fas fa-calendar"></i>
                                             <p>Personal</p>
                                         </a>
+
                                     </li>
                                 @endif --}}
                                 
@@ -200,6 +201,22 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1>¡Bienvenido {{ Auth::user()->name }}!</h1>
+                            <br>
+                      <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-primary text-white mb-4">
+                                <div class="card-body">
+                                    Total de solicitudes pendientes
+                                    <h1>{{ 5 }}</h1>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                      </div>
+
                         </div>
                         <!--
                         <div class="col-sm-6">

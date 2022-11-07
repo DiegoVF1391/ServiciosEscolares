@@ -28,6 +28,8 @@
                             <strong>Correo Electrónico:</strong>
                             {{ $user->email }}
                         </div>
+
+                        
                         <!--<div class="form-group">
                             <strong>Acceso:</strong>
                             @if($user->acceso == true)

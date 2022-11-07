@@ -22,7 +22,7 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-
+        
         $id = auth()->user()->id;
         if(auth()->user()->role == 'user'){
             $solicitud = DB::table('solicitudes')
