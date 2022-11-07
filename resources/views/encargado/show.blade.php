@@ -22,21 +22,22 @@
                         
                         <div class="form-group">
                             <strong>Nombre:</strong>
-                            {{ $encargado->name }}
+                            {{ $user->name }}
                         </div>
                         <div class="form-group">
                             <strong>Correo Electrónico:</strong>
-                            {{ $encargado->email }}
+                            {{ $user->email }}
                         </div>
-                        <!--<div class="form-group">
-                            <strong>Acceso:</strong>
-                            @if($user->acceso == true)
-                                Activo
+                        <div class="form-group">
+                            <strong>Tipo de usuario:</strong>
+                            @if($user->role == 'boss')
+                                Encargado
                             @endif
-                            @if($user->acceso == false)
-                                Inactivo
-                            @endif
-                        </div>-->
+                        </div>
+                        <div class="form-group">
+                            <strong>Departamento:</strong>
+                            {{ $departamento->nombre }}
+                        </div>
                     </div>
                 </div>
             </div>

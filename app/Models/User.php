@@ -15,11 +15,13 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $primaryKey = 'id';
     public $incrementing = true;
-
+    
     static $rules = [
-		'name' => 'required',
+		'name' => 'required|string|max:24',
 		'email' => 'required',
 		'password' => 'required',
+        //'role' => 'required',
+        'id_departamento' => 'required|min:0|not_in:0'
     ];
 
     protected $perPage = 20;
@@ -32,7 +34,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        //'role',
         'id_departamento' 
     ];
 

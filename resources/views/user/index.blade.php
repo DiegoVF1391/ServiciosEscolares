@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo') }}
+                                  {{ __('Crear nuevo personal') }}
                                 </a>
                               </div>
                         </div>
@@ -38,7 +38,7 @@
                                         
 										<th>Nombre</th>
 										<th>Email</th>
-										<!--<th>Acceso</th>-->
+										<th>Departamento</th>
                                         
                                         <th></th>
                                     </tr>
@@ -50,6 +50,7 @@
                                             
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->email }}</td>
+                                            <td>{{ $user->departamento }}</td>
 
                                             <td>
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">

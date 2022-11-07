@@ -28,16 +28,16 @@
                             <strong>Correo Electrónico:</strong>
                             {{ $user->email }}
                         </div>
-                        <!--<div class="form-group">
-                            <strong>Acceso:</strong>
-                            @if($user->acceso == true)
-                                Activo
+                        <div class="form-group">
+                            <strong>Tipo de usuario:</strong>
+                            @if($user->role == 'user')
+                                Personal
                             @endif
-                            @if($user->acceso == false)
-                                Inactivo
-                            @endif
-                        </div>-->
-
+                        </div>
+                        <div class="form-group">
+                            <strong>Departamento:</strong>
+                            {{ $departamento->nombre }}
+                        </div>
                     </div>
                 </div>
             </div>

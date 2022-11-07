@@ -133,9 +133,15 @@
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Recursos<i class="right fas fa-angle-left"></i>
-                                </p>
+                                @if (auth()->user()->role == 'admin')
+                                    <p>Recursos del administrador<i class="right fas fa-angle-left"></i></p>
+                                @endif
+                                @if (auth()->user()->role == 'boss')
+                                    <p>Recursos del encargado<i class="right fas fa-angle-left"></i></p>
+                                @endif
+                                @if (auth()->user()->role == 'user')
+                                    <p>Recursos del personal<i class="right fas fa-angle-left"></i></p>
+                                @endif
                             </a>
                             <ul class="nav nav-treeview">
                                 
@@ -153,20 +159,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{  route('users.index') }}" class="nav-link inactive">
+                                        <a href="{{ route('users.index') }}" class="nav-link inactive">
                                             <i class="nav-icon fas fa-calendar"></i>
                                             <p>Personal</p>
                                         </a>
                                     </li>
                                 @endif
-                                {{-- @if (auth()->user()->role == 'admin' || auth()->user()->role == 'boss')
-                                    <li class="nav-item">
-                                        <a href="{{  route('users.index') }}" class="nav-link inactive">
-                                            <i class="nav-icon fas fa-calendar"></i>
-                                            <p>Personal</p>
-                                        </a>
-                                    </li>
-                                @endif --}}
                                 
                                 @if (auth()->user()->role == 'user' || auth()->user()->role == 'boss')
                                     <li class="nav-item">
@@ -184,6 +182,14 @@
                                     
                                 @endif
                                 
+                                @if (auth()->user()->role == 'admin')
+                                    <li class="nav-item">
+                                        <a href="{{ url('/reporte/servicios') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>Estadisticas de servicios</p>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
                     </ul>
@@ -201,14 +207,6 @@
                         <div class="col-sm-6">
                             <h1>¡Bienvenido {{ Auth::user()->name }}!</h1>
                         </div>
-                        <!--
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Blank Page</li>
-                            </ol>
-                        </div> 
-                        -->
                     </div>
                 </div>
                 <!-- /.container-fluid -->
