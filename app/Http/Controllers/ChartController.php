@@ -56,4 +56,24 @@ class ChartController extends Controller
 
         return view('charts.servicios_admin', compact('mantenimiento', 'it'));
     }
+
+    public function reportesAtencion()
+    {
+        $dep = auth()->user()->id_departamento;
+        $atenciones = Solicitud::select(
+            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
+            DB::raw('COUNT(id_solicitud) as count'))
+            ->where('estado', '=', 'atendida')
+            ->where('id_departamento', '=', $dep)
+            ->groupBy('month')
+            ->get()
+            ->toArray();
+        $lista = array_fill(0, 12, 0);
+        foreach($atenciones as $s){
+            $index = $s['month']-1;
+            $lista[$index] = $s['count'];
+        }
+
+        return view('charts.atenciones_boss', compact('lista'));
+    }
 }

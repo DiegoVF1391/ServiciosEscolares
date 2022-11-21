@@ -164,7 +164,7 @@
                                             <p>Personal</p>
                                         </a>
                                     </li>
-                                @endif
+                                @endif                                
                                 
                                 @if (auth()->user()->role == 'user' || auth()->user()->role == 'boss')
                                     <li class="nav-item">
@@ -187,6 +187,15 @@
                                         <a href="{{ url('/reporte/servicios') }}" class="nav-link inactive">
                                             <i class="nav-icon fas fa-calendar"></i>
                                             <p>Estadisticas de servicios</p>
+                                        </a>
+                                    </li>
+                                @endif
+
+                                @if (auth()->user()->role == 'boss')
+                                    <li class="nav-item">
+                                        <a href="{{ url('/reporte/atencion') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>Estadisticas de atención</p>
                                         </a>
                                     </li>
                                 @endif
