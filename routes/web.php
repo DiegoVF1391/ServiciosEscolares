@@ -27,7 +27,7 @@ Route::get('/', function () {
 //RUTAS PARA LAS VISTAS
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/reporte/servicios', [App\Http\Controllers\ChartController::class, 'serviciosAdmin']);
+Route::get('/reporte/servicios', [App\Http\Controllers\ChartController::class, 'serviciosAdmin'])->name('/reporte/servicios');
 
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('users', UserController::class)->middleware('auth.admin'); 
