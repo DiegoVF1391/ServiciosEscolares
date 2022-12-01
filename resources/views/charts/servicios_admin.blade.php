@@ -22,6 +22,23 @@
                         </div>
                 </div>
             </div>
+            
+            <div class="info-box bg-success">
+                <span class="info-box-icon"><i class="far fa-file-excel"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Exportar datos en Excel</span>
+                  <span class="info-box-number">Clic en el boton para descargar el reporte en Excel de los empleados</span><br>
+                  <a class="btn btn-light" href="{{ route('reporteExcel') }}"><i class="fa fa-fw fa-download"></i>  Descargar Excel</a>
+                </div>
+            </div>
+            <div class="info-box bg-danger">
+                <span class="info-box-icon"><i class="far fa-file-pdf"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Exportar datos en PDF</span>
+                    <span class="info-box-number">Clic en el boton para descargar el reporte en Excel de los empleados</span><br>
+                    <a class="btn btn-light" href="{{ route('reporteExcel') }}"><i class="fa fa-fw fa-download"></i>  Descargar PDF</a>
+                  </div>
+            </div>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>

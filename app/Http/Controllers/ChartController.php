@@ -7,6 +7,9 @@ use App\Models\Departamento;
 use App\Models\Solicitud;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\Cast\Object_;
+use Maatwebsite\Excel\Facades\Excel;
+
+use App\Exports\ReportesExport;
 
 class ChartController extends Controller
 {
@@ -23,6 +26,8 @@ class ChartController extends Controller
             $index = $s['month']-1;
             $counts[$index] = $s['count'];
         }*/
+
+        
 
         
         //CANTIDAD DE SERVICIOS TERMINADOS
@@ -116,5 +121,9 @@ class ChartController extends Controller
         }
 
         return view('charts.servicios_admin', compact('mantenimiento', 'it','calificacionIt', 'calificacionMantenimiento', 'penMantenimiento', 'penIt'));
+    }
+
+    public function exportExcel(){
+        return Excel::download(new ReportesExport, 'Reporte-del-sistema.xlsx');
     }
 }
