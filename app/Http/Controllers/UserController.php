@@ -120,9 +120,9 @@ class UserController extends Controller
         request()->validate(User::$rules);
 
         $user->update($request->all());
-
+        
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Usuario modificado de manera éxitosa.');
     }
 
     /**

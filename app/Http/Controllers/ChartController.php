@@ -24,6 +24,8 @@ class ChartController extends Controller
             $counts[$index] = $s['count'];
         }*/
 
+        
+        //CANTIDAD DE SERVICIOS TERMINADOS
         $serviciosMante = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('COUNT(id_solicitud) as count'))
@@ -52,8 +54,67 @@ class ChartController extends Controller
             $it[$index] = $s['count'];
         }
 
+        //CALIFIACIONES PROMEDIO DE LOS SERVICIOS
+         
+        $caliMan = Solicitud::select(
+            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
+            DB::raw('AVG(calificacion) as calificacion'))
+            ->where('estado', '=', 'finalizado')
+            ->where('id_departamento', '=', '1')
+            ->groupBy('month')
+            ->get()
+            ->toArray();
+        $calificacionMantenimiento = array_fill(0, 12, 0);
+        foreach($caliMan as $p){
+            $index = $p['month']-1;
+            $calificacionMantenimiento[$index] = floatval($p['calificacion']);
+        }  
+        
+        $caliIt = Solicitud::select(
+            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
+            DB::raw('AVG(calificacion) as calificacion'))
+            ->where('estado', '=', 'finalizado')
+            ->where('id_departamento', '=', '2')
+            ->groupBy('month')
+            ->get()
+            ->toArray();
+        $calificacionIt = array_fill(0, 12, 0);
+        foreach($caliIt as $p){
+            $index = $p['month']-1;
+            $calificacionIt[$index] = floatval($p['calificacion']);
+        }
 
+        //CANTIDAD DE SERVICIOS PENDIENTES
+        $penMan = Solicitud::select(
+            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
+            DB::raw('COUNT(id_solicitud) as count'))
+            ->where('estado', '=', 'En progreso')
+            //->where('estado', '=', 'asignada')
+            ->where('id_departamento', '=', '1')
+            ->groupBy('month')
+            ->get()
+            ->toArray();
+        $penMantenimiento = array_fill(0, 12, 0);
+        foreach($penMan as $p){
+            $index = $p['month']-1;
+            $penMantenimiento[$index] = $p['count'];
+        }
 
-        return view('charts.servicios_admin', compact('mantenimiento', 'it'));
+        $pendienteIt = Solicitud::select(
+            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
+            DB::raw('COUNT(id_solicitud) as count'))
+            ->where('estado', '=', 'En progreso')
+            //->where('estado', '=', 'asignada')
+            ->where('id_departamento', '=', '2')
+            ->groupBy('month')
+            ->get()
+            ->toArray();
+        $penIt = array_fill(0, 12, 0);
+        foreach($pendienteIt as $p){
+            $index = $p['month']-1;
+            $penIt[$index] = $p['count'];
+        }
+
+        return view('charts.servicios_admin', compact('mantenimiento', 'it','calificacionIt', 'calificacionMantenimiento', 'penMantenimiento', 'penIt'));
     }
 }

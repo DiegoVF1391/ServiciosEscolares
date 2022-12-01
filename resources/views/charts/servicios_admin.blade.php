@@ -11,10 +11,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                        <div id="container">
+                        <div id="chart-servicios" class="chart">
+
+                        </div><br>
+                        <div id="chart-pendientes" class="chart">
 
                         </div>
-                    
+                        <div id="chart-calis" class="chart">
+
+                        </div>
                 </div>
             </div>
 
@@ -24,40 +29,113 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
         <script> 
-            // Data retrieved https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature
-        Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Solicitudes finalizadas en todos los departamentos'
-        },
-        subtitle: {
-            text: 'Cantidad total de todas las solicitudes que fueron finalizadas por cada mes'
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-            text: 'Cantidad de solicitudes'
-            }
-        },
-        plotOptions: {
-            line: {
-            dataLabels: {
-                enabled: true
+            Highcharts.chart('chart-servicios', {
+            chart: {
+                type: 'line'
             },
-            enableMouseTracking: false
-            }
-        },
-        series: [{
-            name: 'Mantenimiento',
-            data: @json($mantenimiento)
-        }, {
-            name: 'IT',
-            data: @json($it)
-        }]
-        });
+            title: {
+                text: 'Solicitudes finalizadas en todos los departamentos'
+            },
+            subtitle: {
+                text: 'Cantidad total de todas las solicitudes que fueron finalizadas por cada mes'
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yAxis: {
+                title: {
+                text: 'Cantidad de solicitudes'
+                }
+            },
+            plotOptions: {
+                line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Mantenimiento',
+                data: @json($mantenimiento)
+            }, {
+                name: 'IT',
+                data: @json($it)
+            }]
+            });
+        </script>
+        
+        <script> 
+            Highcharts.chart('chart-pendientes', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Solicitudes pendientes en todos los departamentos'
+            },
+            subtitle: {
+                text: 'Cantidad total de todas las solicitudes que están pendientes por cada mes'
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yAxis: {
+                title: {
+                text: 'Cantidad de solicitudes'
+                }
+            },
+            plotOptions: {
+                line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Mantenimiento',
+                data: @json($penMantenimiento)
+            }, {
+                name: 'IT',
+                data: @json($penIt)
+            }]
+            });
+        </script>
+
+        <script>   
+            Highcharts.chart('chart-calis', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Calificaciones de solicitudes finalizadas en todos los departamentos'
+            },
+            subtitle: {
+                text: 'Cantidad total de todas las solicitudes que fueron finalizadas por cada mes'
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yAxis: {
+                title: {
+                text: 'Calificaciones'
+                }
+            },
+            plotOptions: {
+                line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Mantenimiento',
+                data: @json($calificacionMantenimiento)
+            }, {
+                name: 'IT',
+                data: @json($calificacionIt)
+            }]
+            });
         </script>
 @endsection
