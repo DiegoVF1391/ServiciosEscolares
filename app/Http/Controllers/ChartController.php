@@ -18,7 +18,7 @@ class ChartController extends Controller
         /*$serviciosTotales = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('COUNT(id_solicitud) as count'))
-            ->where('estado', '=', 'finalizado')
+            ->where('estado', '=', 'atendida')
             ->groupBy('month')
             ->get()
             ->toArray();
@@ -32,7 +32,7 @@ class ChartController extends Controller
         $serviciosMante = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('COUNT(id_solicitud) as count'))
-            ->where('estado', '=', 'finalizado')
+            ->where('estado', '=', 'atendida')
             ->where('id_departamento', '=', '1')
             ->groupBy('month')
             ->get()
@@ -46,7 +46,7 @@ class ChartController extends Controller
         $serviciosIT = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('COUNT(id_solicitud) as count'))
-            ->where('estado', '=', 'finalizado')
+            ->where('estado', '=', 'atendida')
             ->where('id_departamento', '=', '2')
             ->groupBy('month')
             ->get()
@@ -158,5 +158,31 @@ class ChartController extends Controller
         
 
         return $pdf->download('Reporte-del-sistema.pdf');
+    }
+
+    public function serviciosDep(){
+        $id_departamento = auth()->user()->id_departamento;
+        $serviciosDep = Solicitud::select(
+            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
+            DB::raw('COUNT(id_solicitud) as count'))
+            ->where('estado', '=', 'atendida')
+            ->where('id_departamento', '=', $id_departamento)
+            ->groupBy('month')
+            ->get()
+            ->toArray();
+        $total = array_fill(0, 12, 0);
+        foreach($serviciosDep as $s){
+            $index = $s['month']-1;
+            $total[$index] = $s['count'];
+        }
+
+        $depa = DB::table('departamentos')
+        ->select('nombre')
+        ->where('id_departamento', '=', $id_departamento)
+        ->get();
+        // dd($depa[0]->nombre);
+        $d = $depa[0]->nombre;
+        // dd($d);
+        return view('charts.servicios_dep', compact('depa','total'));
     }
 }

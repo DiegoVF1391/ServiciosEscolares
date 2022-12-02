@@ -186,7 +186,15 @@
                                     <li class="nav-item">
                                         <a href="{{ url('/reporte/servicios') }}" class="nav-link inactive">
                                             <i class="nav-icon fas fa-calendar"></i>
-                                            <p>Estadisticas de servicios</p>
+                                            <p>Estadísticas de servicios</p>
+                                        </a>
+                                    </li>
+                                @endif
+                                @if (auth()->user()->role == 'boss')
+                                    <li class="nav-item">
+                                        <a href="{{ url('/reporte/departamento') }}" class="nav-link inactive">
+                                            <i class="nav-icon fas fa-calendar"></i>
+                                            <p>Estadísticas de departamento</p>
                                         </a>
                                     </li>
                                 @endif
