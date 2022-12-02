@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Departamento;
-use App\Models\Encargado;
 use App\Models\User;
+use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -84,7 +83,7 @@ class EncargadoController extends Controller
         $user = User::find($id);
         $departamento = Departamento::find($user->id_departamento);
         
-        return view('encargado.show', compact('user', 'departamento'));
+        return view('encargado.show', compact('user','departamento'));
     }
 
     /**
@@ -97,7 +96,7 @@ class EncargadoController extends Controller
     {
         $user = User::find($id);
         $departamentos = Departamento::all();
-        return view('encargado.edit', compact('user','departamentos'));
+        return view('user.edit', compact('user','departamentos'));
     }
 
     /**
@@ -110,9 +109,9 @@ class EncargadoController extends Controller
     public function update(Request $request, User $user)
     {
         request()->validate(User::$rules);
-
+        
         $user->update($request->all());
-
+        //dd($user->update($request->all()));
         return redirect()->route('encargados.index')
             ->with('success', 'Encargado modificado de manera éxitosa.');
     }

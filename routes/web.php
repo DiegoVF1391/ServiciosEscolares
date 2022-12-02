@@ -28,6 +28,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/reporte/servicios', [App\Http\Controllers\ChartController::class, 'serviciosAdmin']);
+Route::get('reporte-excel', [App\Http\Controllers\ChartController::class, 'exportExcel'])->name('reporteExcel');
+Route::get('reporte-pdf', [App\Http\Controllers\ChartController::class, 'exportPdf'])->name('reportePdf');
 
 //RUTAS PARA LA BASE DE DATOS
 Route::resource('users', UserController::class)->middleware('auth.admin'); 
