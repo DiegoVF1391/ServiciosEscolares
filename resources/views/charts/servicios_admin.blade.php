@@ -4,9 +4,8 @@
             <div class="card">
                 <div class="card-header">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-
                         <span id="card_title">
-                            {{ __('Reportes de servicios') }}
+                            <h2 class="display-8">{{ __('Reportes de servicios') }}</h2>
                         </span>
                     </div>
                 </div>
@@ -21,23 +20,41 @@
 
                         </div>
                 </div>
-            </div>
+            </div><br>
             
-            <div class="info-box bg-success">
-                <span class="info-box-icon"><i class="far fa-file-excel"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Exportar datos en Excel</span>
-                  <span class="info-box-number">Clic en el boton para descargar el reporte en Excel de los empleados</span><br>
-                  <a class="btn btn-light" href="{{ route('reporteExcel') }}"><i class="fa fa-fw fa-download"></i>  Descargar Excel</a>
+            
+            
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-16">
+                        <div class="container text-center">
+                            <h1 class="display-4">Exportar datos</h1><br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="info-box bg-success">
+                                        <span class="info-box-icon"><i class="far fa-file-excel"></i></span>
+                                        <div class="info-box-content">
+                                          <span class="info-box-text">Exportar datos en Excel</span>
+                                          <span class="info-box-number">Clic en el boton para descargar el reporte en Excel de los empleados</span><br>
+                                          <a class="btn btn-light" href="{{ route('reporteExcel') }}"><i class="fa fa-fw fa-download"></i>  Descargar Excel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="info-box bg-danger">
+                                        <span class="info-box-icon"><i class="far fa-file-pdf"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Exportar datos en PDF</span>
+                                            <span class="info-box-number">Clic en el boton para descargar el reporte en Excel de los empleados</span><br>
+                                            <a class="btn btn-light" href="{{ route('reportePdf') }}"><i class="fa fa-fw fa-download"></i>  Descargar PDF</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="info-box bg-danger">
-                <span class="info-box-icon"><i class="far fa-file-pdf"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Exportar datos en PDF</span>
-                    <span class="info-box-number">Clic en el boton para descargar el reporte en Excel de los empleados</span><br>
-                    <a class="btn btn-light" href="{{ route('reporteExcel') }}"><i class="fa fa-fw fa-download"></i>  Descargar PDF</a>
-                  </div>
             </div>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>

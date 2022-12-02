@@ -27,9 +27,6 @@ class ChartController extends Controller
             $counts[$index] = $s['count'];
         }*/
 
-        
-
-        
         //CANTIDAD DE SERVICIOS TERMINADOS
         $serviciosMante = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
@@ -90,6 +87,7 @@ class ChartController extends Controller
         }
 
         //CANTIDAD DE SERVICIOS PENDIENTES
+
         $penMan = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('COUNT(id_solicitud) as count'))
@@ -123,7 +121,14 @@ class ChartController extends Controller
         return view('charts.servicios_admin', compact('mantenimiento', 'it','calificacionIt', 'calificacionMantenimiento', 'penMantenimiento', 'penIt'));
     }
 
+    //EXPORTAR DATOS EN EXCEL
     public function exportExcel(){
         return Excel::download(new ReportesExport, 'Reporte-del-sistema.xlsx');
+    }
+    
+    //EXPORTAR DATOS EN PDF
+    public function exportPdf(){
+        dd("hoka");
+        //return Excel::download(new ReportesExport, 'Reporte-del-sistema.xlsx');
     }
 }
