@@ -8,6 +8,7 @@ use App\Models\Solicitud;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\Cast\Object_;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use App\Exports\ReportesExport;
 
@@ -128,7 +129,34 @@ class ChartController extends Controller
     
     //EXPORTAR DATOS EN PDF
     public function exportPdf(){
-        dd("hoka");
-        //return Excel::download(new ReportesExport, 'Reporte-del-sistema.xlsx');
+        $solicitudes = DB::table('solicitudes')
+        ->join('departamentos', 'solicitudes.id_departamento', '=', 'departamentos.id_departamento')
+        ->join('users', 'solicitudes.id_user_asigna', '=', 'users.id')
+        ->select('solicitudes.id_solicitud', 'solicitudes.nombre', 'solicitudes.descripcion', 'solicitudes.estado', 'users.name','departamentos.nombre as departamento')
+        ->orderBy('departamentos.nombre', 'asc')
+        ->get();
+
+        $penMan = Solicitud::where('estado', '!=', 'finalizado')
+            ->where('id_departamento', '=', '1')
+            ->get()->count();
+
+        $penIt = Solicitud::where('estado', '!=', 'finalizado')
+                ->where('id_departamento', '=', '2')
+                ->get()->count();
+        
+        $caliMan = Solicitud::where('estado', '=', 'finalizado')
+                    ->where('id_departamento', '=', '1')
+                    ->get()
+                    ->avg('calificacion');
+        
+        $caliIt = Solicitud::where('estado', '=', 'finalizado')
+                    ->where('id_departamento', '=', '2')
+                    ->get()
+                    ->avg('calificacion');
+        //dd($caliIt);
+        $pdf = PDF::loadView('charts.solicitudes', compact('solicitudes', 'penIt', 'penMan', 'caliIt', 'caliMan'));
+        
+
+        return $pdf->download('Reporte-del-sistema.pdf');
     }
 }

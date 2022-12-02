@@ -152,7 +152,7 @@
             },
             yAxis: {
                 title: {
-                text: 'Calificaciones'
+                text: 'Calificación'
                 }
             },
             plotOptions: {
