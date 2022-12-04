@@ -27,7 +27,7 @@ Route::get('/', function () {
 //RUTAS PARA LAS VISTAS
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/reporte/servicios', [App\Http\Controllers\ChartController::class, 'serviciosAdmin'])->name('/reporte/servicios');
+Route::get('/reporte/servicios', [App\Http\Controllers\ChartController::class, 'serviciosAdmin']);
 Route::get('/reporte/departamento', [App\Http\Controllers\ChartController::class, 'serviciosDep'])->name('/reporte/departamento');
 Route::get('reporte-excel', [App\Http\Controllers\ChartController::class, 'exportExcel'])->name('reporteExcel');
 Route::get('reporte-pdf', [App\Http\Controllers\ChartController::class, 'exportPdf'])->name('reportePdf');

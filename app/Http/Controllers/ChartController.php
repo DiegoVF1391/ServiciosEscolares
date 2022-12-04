@@ -15,18 +15,6 @@ use App\Exports\ReportesExport;
 class ChartController extends Controller
 {
     public function serviciosAdmin(){
-        /*$serviciosTotales = Solicitud::select(
-            DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
-            DB::raw('COUNT(id_solicitud) as count'))
-            ->where('estado', '=', 'atendida')
-            ->groupBy('month')
-            ->get()
-            ->toArray();
-        $counts = array_fill(0, 12, 0);
-        foreach($serviciosTotales as $s){
-            $index = $s['month']-1;
-            $counts[$index] = $s['count'];
-        }*/
 
         //CANTIDAD DE SERVICIOS TERMINADOS
         $serviciosMante = Solicitud::select(
@@ -62,7 +50,7 @@ class ChartController extends Controller
         $caliMan = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('AVG(calificacion) as calificacion'))
-            ->where('estado', '=', 'finalizado')
+            ->where('estado', '=', 'atendida')
             ->where('id_departamento', '=', '1')
             ->groupBy('month')
             ->get()
@@ -76,7 +64,7 @@ class ChartController extends Controller
         $caliIt = Solicitud::select(
             DB::raw("EXTRACT(MONTH FROM updated_at) as month"),
             DB::raw('AVG(calificacion) as calificacion'))
-            ->where('estado', '=', 'finalizado')
+            ->where('estado', '=', 'atendida')
             ->where('id_departamento', '=', '2')
             ->groupBy('month')
             ->get()
@@ -136,20 +124,20 @@ class ChartController extends Controller
         ->orderBy('departamentos.nombre', 'asc')
         ->get();
 
-        $penMan = Solicitud::where('estado', '!=', 'finalizado')
+        $penMan = Solicitud::where('estado', '!=', 'atendida')
             ->where('id_departamento', '=', '1')
             ->get()->count();
 
-        $penIt = Solicitud::where('estado', '!=', 'finalizado')
+        $penIt = Solicitud::where('estado', '!=', 'atendida')
                 ->where('id_departamento', '=', '2')
                 ->get()->count();
         
-        $caliMan = Solicitud::where('estado', '=', 'finalizado')
+        $caliMan = Solicitud::where('estado', '=', 'atendida')
                     ->where('id_departamento', '=', '1')
                     ->get()
                     ->avg('calificacion');
         
-        $caliIt = Solicitud::where('estado', '=', 'finalizado')
+        $caliIt = Solicitud::where('estado', '=', 'atendida')
                     ->where('id_departamento', '=', '2')
                     ->get()
                     ->avg('calificacion');
