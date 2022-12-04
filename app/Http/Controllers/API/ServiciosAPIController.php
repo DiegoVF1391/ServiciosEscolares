@@ -33,7 +33,47 @@ class ServiciosAPIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:50',
+            'descripcion' => 'required|string|max:250',
+            'id_departamento' => 'required|min:0|not_in:0',
+            'id_asignado' => 'integer|min:1',
+            'comentarios'     => 'string|string|max:250',
+            'estado' => 'string|string|max:50',
+            'comentarios_asignado' => 'string|string|max:250'
+        ]);
+
+        try {
+            /*$solicitud = new Solicitud();
+            $solicitud->fill($validated);
+            $solicitud->save();*/
+
+            $solicitud = Solicitud::create($validated);
+            
+            $usu = Solicitud::find($solicitud->id_solicitud);
+            //$usu->id_user_asigna = auth()->user()->id;
+            $usu->save();
+
+            return response()->json([
+                'msg' => 'La solicitud fue creada satisfactoriamente'
+            ]);
+        } catch(\Exception $ex) {
+            Log::error("Error API en store: " . $ex->getMessage());
+
+            return response()->json([
+                'msg' => 'Error al crear el solicitud'
+            ], 500);
+        }
+
+        /*$data = request()->validate(Solicitud::$rules);
+        $solicitud = Solicitud::create($data);
+        
+        $usu = Solicitud::find($solicitud->id_solicitud);
+        $usu->id_user_asigna = auth()->user()->id;
+        $usu->save();
+
+        return redirect()->route('solicitud.index')
+            ->with('success', 'La solicitud fue creada satisfactoriamente.');*/
     }
 
     /**
@@ -79,6 +119,25 @@ class ServiciosAPIController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $solicitud = Solicitud::find($id);
+
+        if($solicitud->estado!= 'asignada'){
+            $solicitud->estado ='cancelada';
+            $solicitud->save();
+
+            return response()->json([
+                'msg' => 'Se ha enviado petición para cancelar solicitud'
+            ]);
+        }
+
+        else
+        {
+            $solicitud->estado ='pendiente';
+            $solicitud->save();
+
+            return response()->json([
+                'msg' => 'La solicitud no existe'
+            ], 500);
+        }
     }
 }
