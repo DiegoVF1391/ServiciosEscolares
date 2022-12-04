@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-use App\Models\User;
+use App\Models\Solicitud;
 
 class ServiciosAPIController extends Controller
 {
@@ -18,7 +18,7 @@ class ServiciosAPIController extends Controller
      */
     public function index()
     {
-        $servicios = User::all();
+        $servicios = Solicitud::all();
 
         return response()->json([
             'servicios' => $servicios
@@ -44,7 +44,7 @@ class ServiciosAPIController extends Controller
      */
     public function show($id)
     {
-        $servicio = User::find($id);
+        $servicio = Solicitud::find($id);
 
         if($servicio) {
             return response()->json([
