@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Solicitud;
 
@@ -38,9 +39,7 @@ class ServiciosAPIController extends Controller
             'descripcion' => 'required|string|max:250',
             'id_departamento' => 'required|min:0|not_in:0',
             'id_asignado' => 'integer|min:1',
-            'comentarios'     => 'string|string|max:250',
-            'estado' => 'string|string|max:50',
-            'comentarios_asignado' => 'string|string|max:250'
+            'comentarios'     => 'string|string|max:250'
         ]);
 
         try {
@@ -108,7 +107,38 @@ class ServiciosAPIController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $solicitud = Solicitud::find($id);
+
+        if($solicitud) {
+            $validated = $request->validate([
+                'nombre' => 'required|string|max:50',
+                'descripcion' => 'required|string|max:250',
+                'id_departamento' => 'required|min:0|not_in:0',
+                'id_asignado' => 'integer|min:1',
+                'comentarios'     => 'string|string|max:250',
+                'estado' => 'string|string|max:50',
+                'comentarios_asignado' => 'string|string|max:250',
+                'fechaAsignacion' => 'date', 
+                'fechaFinalización' => 'date'
+                
+            ]);
+
+            $solicitud->nombre = $validated['nombre'];
+            $solicitud->descripcion = $validated['descripcion'];
+            $solicitud->id_departamento = $validated['nombre'];
+            $solicitud->descripcion = $validated['descripcion'];
+            $solicitud->save();
+
+            return response()->json([
+                'msg' => 'Usuario actualizado'
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'msg' => 'El usuario no existe'
+            ], 500);
+        }
     }
 
     /**
@@ -129,7 +159,6 @@ class ServiciosAPIController extends Controller
                 'msg' => 'Se ha enviado petición para cancelar solicitud'
             ]);
         }
-
         else
         {
             $solicitud->estado ='pendiente';
