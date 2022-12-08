@@ -19,7 +19,8 @@ class LoginAPIController extends Controller
             return response()->json([
                 'token' => $request->user()->createToken(
                     $validated['email']
-                )->plainTextToken
+                )->plainTextToken,
+                'message' => 'Accediste exitosamente a tu cuenta'
             ]);
         } else {
             return response()->json([
