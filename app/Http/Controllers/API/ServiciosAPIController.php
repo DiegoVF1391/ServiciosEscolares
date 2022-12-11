@@ -113,30 +113,20 @@ class ServiciosAPIController extends Controller
             $validated = $request->validate([
                 'nombre' => 'required|string|max:50',
                 'descripcion' => 'required|string|max:250',
-                'id_departamento' => 'required|min:0|not_in:0',
-                'id_asignado' => 'integer|min:1',
-                'comentarios'     => 'string|string|max:250',
-                'estado' => 'string|string|max:50',
-                'comentarios_asignado' => 'string|string|max:250',
-                'fechaAsignacion' => 'date', 
-                'fechaFinalización' => 'date'
-                
             ]);
 
             $solicitud->nombre = $validated['nombre'];
             $solicitud->descripcion = $validated['descripcion'];
-            $solicitud->id_departamento = $validated['nombre'];
-            $solicitud->descripcion = $validated['descripcion'];
             $solicitud->save();
 
             return response()->json([
-                'msg' => 'Usuario actualizado'
+                'msg' => 'Solicitud editada'
             ]);
         }
         else
         {
             return response()->json([
-                'msg' => 'El usuario no existe'
+                'msg' => 'La solicitud no existe'
             ], 500);
         }
     }
