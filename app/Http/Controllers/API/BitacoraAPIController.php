@@ -90,7 +90,25 @@ class BitacoraAPIController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $bitacora = Bitacora::find($id);
+        if($bitacora){
+            $validated = $request->validate([
+                'actividad' => 'required|string|max:100',
+                'descripcion' => 'required|string|max:250',
+            ]);
+
+            $bitacora->update($validated);
+
+            return response()->json([
+                'msg' => 'Bitácora actualizada'
+            ]);
+        }else{
+            return response()->json([
+                'msg' => 'La bitácora no existe'
+            ], 500);
+        }
+        
     }
 
     /**
