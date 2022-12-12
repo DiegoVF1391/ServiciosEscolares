@@ -19,12 +19,14 @@ use App\Http\Controllers\API\BitacoraAPIController;
 
 Route::post('login', [LoginAPIController::class, 'login'])->name('api.login');
 
-Route::apiResource('servicios', ServiciosAPIController::class);
-Route::apiResource('bitacoras', BitacoraAPIController::class);
-
-
-/*Route::middleware('auth.admin')->group(function () {
-    Route::apiResource('usuarios', UsuarioAPIController::class);
-});*/
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('servicios', ServiciosAPIController::class);
+    Route::apiResource('bitacoras', BitacoraAPIController::class);
+    Route::post('logout', [LoginAPIController::class, 'logout']);
+    /*Route::apiResource('usuarios', UsuarioAPIController::class);
+    Route::put('usuarios-editar', [UsuarioAPIController::class, 'edit'])->name('usuarios.editar');
+    Route::get('last', [LastAPIController::class, 'last'])->name('last');
+    Route::get('access', [LastAPIController::class, 'accedio'])->name('access');*/
+});
 
 

@@ -20,12 +20,24 @@ class LoginAPIController extends Controller
                 'token' => $request->user()->createToken(
                     $validated['email']
                 )->plainTextToken,
-                'message' => 'Accediste exitosamente a tu cuenta'
+                'message' => 'Success'
             ]);
         } else {
             return response()->json([
                 'message' => 'Acceso denegado'
             ], 401);
         }
+    }
+
+    public function logout(){
+        $token = request()->bearerToken();
+        
+        /** @var PersonalAccessToken $model */
+        $model = Sanctum::$personalAccessTokenModel;
+
+        $accessToken = $model::findToken($token);
+        $accessToken->delete();
+
+        return response()->json(['message' => "Hasta la proxima"], 204);
     }
 }
