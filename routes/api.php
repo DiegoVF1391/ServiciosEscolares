@@ -18,6 +18,7 @@ use App\Http\Controllers\API\BitacoraAPIController;
 */
 
 Route::post('login', [LoginAPIController::class, 'login'])->name('api.login');
+Route::post('register', [LoginAPIController::class, 'createUser'])->name('api.register');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('servicios', ServiciosAPIController::class);

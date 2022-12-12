@@ -5,6 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use Laravel\Sanctum\PersonalAccessToken as PersonalAccessToken;
 
 class LoginAPIController extends Controller
 {
@@ -15,12 +19,15 @@ class LoginAPIController extends Controller
             'password' => 'required'
         ]);
 
-        if( Auth::attempt($validated) ) {
+        $usuario = User::where('email', $validated['email'])->first();//BUSCAMOS LA INFORMACION DEL USUARIO
+
+        if( Auth::attempt($validated) && $usuario->role == 'user' ) { //CHECAMOS QUE SEA UN USUARIO Y NO BOSS O ADMIN
             return response()->json([
-                'token' => $request->user()->createToken(
+                'access_token' => $request->user()->createToken(
                     $validated['email']
                 )->plainTextToken,
-                'message' => 'Success'
+                'message' => 'Success',
+                'user' => $usuario
             ]);
         } else {
             return response()->json([
@@ -29,15 +36,46 @@ class LoginAPIController extends Controller
         }
     }
 
-    public function logout(){
-        $token = request()->bearerToken();
-        
-        /** @var PersonalAccessToken $model */
-        $model = Sanctum::$personalAccessTokenModel;
+    public function logout(Request $request){
+        auth()->user()->tokens()->delete();
 
-        $accessToken = $model::findToken($token);
-        $accessToken->delete();
+        return ['message' => "Salió de su cuenta de usuario"];
+    }
 
-        return response()->json(['message' => "Hasta la proxima"], 204);
+    public function createUser(Request $request)
+    {
+        try {
+            //Validated
+            $validateUser = Validator::make($request->all(), 
+            [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required'
+            ]);
+
+            if($validateUser->fails()){
+                return response()->json([
+                    'message' => 'validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            return response()->json([
+                'message' => 'Usuario creado exitosamente',
+                'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 }
