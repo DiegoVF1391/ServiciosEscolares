@@ -66,9 +66,12 @@ class LoginAPIController extends Controller
                 'password' => Hash::make($request->password)
             ]);
 
+            $usuario = User::find($user->id);
+
             return response()->json([
                 'message' => 'Usuario creado exitosamente',
-                'access_token' => $user->createToken("API TOKEN")->plainTextToken
+                'access_token' => $user->createToken("API TOKEN")->plainTextToken,
+                'user' => $usuario
             ], 200);
 
         } catch (\Throwable $th) {
