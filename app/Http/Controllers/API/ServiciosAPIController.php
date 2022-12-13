@@ -20,7 +20,8 @@ class ServiciosAPIController extends Controller
     public function index()
     {
         $id = auth()->user()->id;
-        $servicios = Solicitud::where('id_asignado', '=', $id)->get();
+        $servicios = Solicitud::where('id_asignado', '=', $id)->
+        orWhere('id_user_asigna', '=', $id)->get();
 
         return response()->json($servicios);
     }
@@ -42,9 +43,6 @@ class ServiciosAPIController extends Controller
         ]);
 
         try {
-            /*$solicitud = new Solicitud();
-            $solicitud->fill($validated);
-            $solicitud->save();*/
 
             $solicitud = Solicitud::create($validated);
             
@@ -62,16 +60,6 @@ class ServiciosAPIController extends Controller
                 'msg' => 'Error al crear el solicitud'
             ], 500);
         }
-
-        /*$data = request()->validate(Solicitud::$rules);
-        $solicitud = Solicitud::create($data);
-        
-        $usu = Solicitud::find($solicitud->id_solicitud);
-        $usu->id_user_asigna = auth()->user()->id;
-        $usu->save();
-
-        return redirect()->route('solicitud.index')
-            ->with('success', 'La solicitud fue creada satisfactoriamente.');*/
     }
 
     /**

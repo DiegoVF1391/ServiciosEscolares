@@ -35,7 +35,8 @@ class BitacoraAPIController extends Controller
     {
         $validated = $request->validate([
             'actividad' => 'required|string|max:100',
-            'descripcion' => 'string|max:250'
+            'descripcion' => 'string|max:250',
+            'id_departamento' => 'integer'
         ]);
 
         try {
@@ -43,6 +44,7 @@ class BitacoraAPIController extends Controller
             
             $usu = Bitacora::find($bitacora->id_bitacora);
             $usu->id_personal = auth()->user()->id;
+            $usu->id_departamento = auth()->user()->id_departamento;
             $usu->save();
 
             return response()->json([
@@ -97,7 +99,9 @@ class BitacoraAPIController extends Controller
                 'descripcion' => 'required|string|max:250',
             ]);
 
-            $bitacora->update($validated);
+            $bitacora->actividad = $validated['actividad'];
+            $bitacora->descripcion = $validated['descripcion'];
+            $bitacora->save();
 
             return response()->json([
                 'msg' => 'Bitácora actualizada'
