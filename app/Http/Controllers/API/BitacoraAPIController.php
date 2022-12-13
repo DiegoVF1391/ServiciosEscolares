@@ -19,7 +19,8 @@ class BitacoraAPIController extends Controller
      */
     public function index()
     {
-        $bitacoras = Bitacora::all();
+        $id = auth()->user()->id;
+        $bitacoras = Bitacora::where('id_asignado', '=', $id)->get();
 
         return response()->json([
             'bitacoras' => $bitacoras

@@ -19,7 +19,8 @@ class ServiciosAPIController extends Controller
      */
     public function index()
     {
-        $servicios = Solicitud::all();
+        $id = auth()->user()->id;
+        $servicios = Solicitud::where('id_asignado', '=', $id)->get();
 
         return response()->json([
             'servicios' => $servicios
