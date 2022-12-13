@@ -22,9 +22,7 @@ class BitacoraAPIController extends Controller
         $id = auth()->user()->id;
         $bitacoras = Bitacora::where('id_personal', '=', $id)->get();
 
-        return response()->json([
-            'bitacoras' => $bitacoras
-        ]);
+        return response()->json($bitacoras);
     }
 
     /**
@@ -44,7 +42,7 @@ class BitacoraAPIController extends Controller
             $bitacora = Bitacora::create($validated);
             
             $usu = Bitacora::find($bitacora->id_bitacora);
-            //$usu->id_personal = auth()->user()->id;
+            $usu->id_personal = auth()->user()->id;
             $usu->save();
 
             return response()->json([
@@ -127,7 +125,7 @@ class BitacoraAPIController extends Controller
             $bitacora->delete();
 
             return response()->json([
-                'msg' => 'Bitacora eliminado'
+                'msg' => 'Bitacora eliminada'
             ]);
         }
         else

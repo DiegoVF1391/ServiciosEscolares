@@ -22,9 +22,7 @@ class ServiciosAPIController extends Controller
         $id = auth()->user()->id;
         $servicios = Solicitud::where('id_asignado', '=', $id)->get();
 
-        return response()->json([
-            'servicios' => $servicios
-        ]);
+        return response()->json($servicios);
     }
 
     /**
@@ -51,7 +49,7 @@ class ServiciosAPIController extends Controller
             $solicitud = Solicitud::create($validated);
             
             $usu = Solicitud::find($solicitud->id_solicitud);
-            //$usu->id_user_asigna = auth()->user()->id;
+            $usu->id_user_asigna = auth()->user()->id;
             $usu->save();
 
             return response()->json([
@@ -87,9 +85,7 @@ class ServiciosAPIController extends Controller
         $servicio = Solicitud::find($id);
 
         if($servicio) {
-            return response()->json([
-                'servicio' => $servicio
-            ]);
+            return response()->json([$servicio]);
         }
         else
         {
